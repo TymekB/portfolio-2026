@@ -1,5 +1,34 @@
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import * as simpleIcons from 'simple-icons';
+
+/**
+ * Znaki, dla których aktualna wersja simple-icons nie pasuje.
+ * Plik SVG musi mieć viewBox "0 0 24 24" i jedną ścieżkę, tak jak reszta pakietu.
+ */
+const OVERRIDES = {
+  siRedis: {
+    file: 'icon-overrides/redis.svg',
+    hex: 'D82C20',
+    reason: 'znak sprzed rebrandingu — klasyczny stos warstw, wraz z ówczesną czerwienią',
+  },
+};
+
+function readOverride(key) {
+  const override = OVERRIDES[key];
+  if (!override) {
+    return null;
+  }
+
+  const svg = readFileSync(new URL(override.file, import.meta.url), 'utf8');
+  const viewBox = /viewBox="([^"]+)"/.exec(svg)?.[1];
+  const path = / d="([^"]+)"/.exec(svg)?.[1];
+
+  if (viewBox !== '0 0 24 24' || !path) {
+    throw new Error(`Nadpisanie "${override.file}" ma niezgodny viewBox albo brak ścieżki`);
+  }
+
+  return { path, hex: override.hex };
+}
 
 const WANTED = [
   ['siPhp', 'PHP'],
@@ -27,7 +56,11 @@ const entries = WANTED.map(([key, title]) => {
     throw new Error(`simple-icons nie zawiera ikony "${key}"`);
   }
 
-  return `  { title: ${JSON.stringify(title)}, hex: '#${icon.hex}', path: '${icon.path}' },`;
+  const override = readOverride(key);
+  const path = override?.path ?? icon.path;
+  const hex = override?.hex ?? icon.hex;
+
+  return `  { title: ${JSON.stringify(title)}, hex: '#${hex}', path: '${path}' },`;
 });
 
 const file = `// Plik generowany przez scripts/generate-tech-logos.mjs — nie edytuj ręcznie.
