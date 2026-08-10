@@ -27,7 +27,7 @@ jobs:
 
       - run: npm ci
 
-      - run: npm run build -- --base-href /portfolio-2026/
+      - run: npm run build -- --base-href /
 
       - name: Disable Jekyll processing
         run: touch dist/tymoteuszbaran-pl/browser/.nojekyll
