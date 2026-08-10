@@ -2,35 +2,9 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import * as simpleIcons from 'simple-icons';
 
 /**
- * Znaki, dla których aktualna wersja simple-icons nie pasuje.
- * Plik SVG musi mieć viewBox "0 0 24 24" i jedną ścieżkę, tak jak reszta pakietu.
+ * Znaki z pakietu simple-icons — jednokolorowe, malowane barwą marki.
  */
-const OVERRIDES = {
-  siRedis: {
-    file: 'icon-overrides/redis.svg',
-    hex: 'D82C20',
-    reason: 'znak sprzed rebrandingu — klasyczny stos warstw, wraz z ówczesną czerwienią',
-  },
-};
-
-function readOverride(key) {
-  const override = OVERRIDES[key];
-  if (!override) {
-    return null;
-  }
-
-  const svg = readFileSync(new URL(override.file, import.meta.url), 'utf8');
-  const viewBox = /viewBox="([^"]+)"/.exec(svg)?.[1];
-  const path = / d="([^"]+)"/.exec(svg)?.[1];
-
-  if (viewBox !== '0 0 24 24' || !path) {
-    throw new Error(`Nadpisanie "${override.file}" ma niezgodny viewBox albo brak ścieżki`);
-  }
-
-  return { path, hex: override.hex };
-}
-
-const WANTED = [
+const FROM_PACKAGE = [
   ['siPhp', 'PHP'],
   ['siSymfony', 'Symfony'],
   ['siDoctrine', 'Doctrine'],
@@ -47,35 +21,112 @@ const WANTED = [
   ['siDocker', 'Docker'],
   ['siNginx', 'nginx'],
   ['siGrafana', 'Grafana'],
-  ['siSentry', 'Sentry'],
 ];
 
-const entries = WANTED.map(([key, title]) => {
+/**
+ * Podmiany dla znaków, w których aktualna wersja simple-icons nie odpowiada
+ * temu, co chcemy pokazać. Plik musi mieć viewBox "0 0 24 24" i jedną ścieżkę.
+ */
+const OVERRIDES = {
+  siRedis: {
+    file: 'icon-overrides/redis.svg',
+    hex: 'D82C20',
+    reason: 'znak sprzed rebrandingu — klasyczny stos warstw, wraz z ówczesną czerwienią',
+  },
+};
+
+/**
+ * Marki, których simple-icons w ogóle nie zawiera. Pliki pochodzą wprost od
+ * właściciela znaku, więc zachowują własny viewBox i własne kolory.
+ */
+const CUSTOM = [
+  {
+    key: 'sylius',
+    title: 'Sylius',
+    file: 'icon-overrides/sylius.svg',
+    hex: '30BA9D',
+    after: 'Symfony',
+  },
+];
+
+function readSvg(file) {
+  const svg = readFileSync(new URL(file, import.meta.url), 'utf8');
+  const viewBox = /viewBox="([^"]+)"/.exec(svg)?.[1];
+  const paths = [...svg.matchAll(/<path\b[^>]*>/g)].map((match) => {
+    const tag = match[0];
+    return {
+      d: /\sd="([^"]+)"/.exec(tag)?.[1],
+      fill: /\sfill="([^"]+)"/.exec(tag)?.[1],
+    };
+  });
+
+  if (!viewBox || paths.length === 0 || paths.some((part) => !part.d)) {
+    throw new Error(`Plik "${file}" nie zawiera poprawnego viewBox lub ścieżek`);
+  }
+
+  return { viewBox, paths };
+}
+
+function serialise({ title, hex, viewBox, paths }) {
+  const parts = paths
+    .map((part) => {
+      const fill = part.fill && part.fill !== 'none' ? `, fill: '${part.fill}'` : '';
+      return `{ d: '${part.d}'${fill} }`;
+    })
+    .join(', ');
+
+  return `  { title: ${JSON.stringify(title)}, hex: '#${hex}', viewBox: '${viewBox}', parts: [${parts}] },`;
+}
+
+const logos = FROM_PACKAGE.map(([key, title]) => {
   const icon = simpleIcons[key];
   if (!icon) {
     throw new Error(`simple-icons nie zawiera ikony "${key}"`);
   }
 
-  const override = readOverride(key);
-  const path = override?.path ?? icon.path;
-  const hex = override?.hex ?? icon.hex;
+  const override = OVERRIDES[key];
+  if (override) {
+    const { viewBox, paths } = readSvg(override.file);
+    return { title, hex: override.hex ?? icon.hex, viewBox, paths };
+  }
 
-  return `  { title: ${JSON.stringify(title)}, hex: '#${hex}', path: '${path}' },`;
+  // znaki z pakietu malujemy kolorem marki, więc bez własnego fill
+  return { title, hex: icon.hex, viewBox: '0 0 24 24', paths: [{ d: icon.path }] };
 });
 
+for (const custom of CUSTOM) {
+  const { viewBox, paths } = readSvg(custom.file);
+  const entry = { title: custom.title, hex: custom.hex, viewBox, paths };
+  const index = logos.findIndex((logo) => logo.title === custom.after);
+
+  if (index === -1) {
+    throw new Error(`Nie znaleziono znaku "${custom.after}", po którym wstawić "${custom.title}"`);
+  }
+
+  logos.splice(index + 1, 0, entry);
+}
+
 const file = `// Plik generowany przez scripts/generate-tech-logos.mjs — nie edytuj ręcznie.
-// Ścieżki pochodzą z pakietu simple-icons (CC0). Znaki towarowe należą do ich właścicieli.
+// Ścieżki pochodzą z pakietu simple-icons (CC0) oraz z materiałów właścicieli znaków.
+// Znaki towarowe należą do ich właścicieli.
+
+export interface TechLogoPart {
+  readonly d: string;
+  /** Brak oznacza malowanie kolorem marki przez currentColor. */
+  readonly fill?: string;
+}
 
 export interface TechLogo {
   readonly title: string;
   readonly hex: string;
-  readonly path: string;
+  readonly viewBox: string;
+  readonly parts: readonly TechLogoPart[];
 }
 
 export const TECH_LOGOS: readonly TechLogo[] = [
-${entries.join('\n')}
+${logos.map(serialise).join('\n')}
 ];
 `;
 
 writeFileSync(new URL('../src/app/data/tech-logos.ts', import.meta.url), file);
-console.log(`Zapisano ${WANTED.length} logotypów do src/app/data/tech-logos.ts`);
+console.log(`Zapisano ${logos.length} logotypów do src/app/data/tech-logos.ts`);

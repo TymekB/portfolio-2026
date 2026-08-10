@@ -7,9 +7,17 @@
     <ul class="logos">
       @for (logo of logos; track logo.title) {
         <li class="logo" [style.--brand]="logo.hex">
-          <svg viewBox="0 0 24 24" width="30" height="30" role="img" [attr.aria-label]="logo.title">
+          <svg
+            [attr.viewBox]="logo.viewBox"
+            width="30"
+            height="30"
+            role="img"
+            [attr.aria-label]="logo.title"
+          >
             <title>{{ logo.title }}</title>
-            <path [attr.d]="logo.path" fill="currentColor" />
+            @for (part of logo.parts; track $index) {
+              <path [attr.d]="part.d" [attr.fill]="part.fill ?? 'currentColor'" />
+            }
           </svg>
           <span class="logo__name">{{ logo.title }}</span>
         </li>
