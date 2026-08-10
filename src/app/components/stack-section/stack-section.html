@@ -1,0 +1,32 @@
+<section class="section" id="technologie">
+  <div class="container">
+    <p class="section-label">{{ t().stack.label }}</p>
+    <h2 class="section-title">{{ t().stack.title }}</h2>
+    <p class="section-lead">{{ t().stack.lead }}</p>
+
+    <ul class="logos">
+      @for (logo of logos; track logo.title) {
+        <li class="logo" [style.--brand]="logo.hex">
+          <svg viewBox="0 0 24 24" width="30" height="30" role="img" [attr.aria-label]="logo.title">
+            <title>{{ logo.title }}</title>
+            <path [attr.d]="logo.path" fill="currentColor" />
+          </svg>
+          <span class="logo__name">{{ logo.title }}</span>
+        </li>
+      }
+    </ul>
+
+    <div class="stack">
+      @for (group of groups; track group.key) {
+        <div class="stack__group">
+          <h3 class="stack__title">{{ t().stack.groups[group.key] }}</h3>
+          <ul class="stack__items">
+            @for (item of group.items; track item) {
+              <li class="chip">{{ item }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

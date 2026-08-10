@@ -1,0 +1,22 @@
+<section class="section" id="uslugi">
+  <div class="container">
+    <p class="section-label">{{ t().services.label }}</p>
+    <h2 class="section-title">{{ t().services.title }}</h2>
+    <p class="section-lead">{{ t().services.lead }}</p>
+
+    <ul class="services">
+      @for (service of t().services.items; track service.title; let index = $index) {
+        <li class="service">
+          <span class="service__icon"><app-icon [name]="icons[index]!" [size]="22" /></span>
+          <h3 class="service__title">{{ service.title }}</h3>
+          <p class="service__description">{{ service.description }}</p>
+          <ul class="service__bullets">
+            @for (bullet of service.bullets; track bullet) {
+              <li>{{ bullet }}</li>
+            }
+          </ul>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

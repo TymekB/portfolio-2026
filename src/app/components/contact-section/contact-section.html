@@ -1,0 +1,53 @@
+<section class="section contact" id="kontakt">
+  <div class="container">
+    <p class="section-label">{{ t().contact.label }}</p>
+    <h2 class="section-title">{{ t().contact.title }}</h2>
+    <p class="section-lead">{{ t().contact.lead }}</p>
+
+    <div class="contact__grid">
+      <app-contact-form />
+
+      <aside class="contact__aside">
+        <a class="contact__mail" [href]="'mailto:' + email">
+          <span class="contact__mail-label">{{ t().contact.directLabel }}</span>
+          <span class="contact__mail-value">{{ email }}</span>
+        </a>
+
+        <ul class="contact__links">
+          @for (social of socials; track social.url) {
+            <li>
+              <a
+                class="contact__link"
+                [href]="social.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span class="contact__icon"><app-icon [name]="social.icon" [size]="18" /></span>
+                <span class="contact__meta">
+                  <span class="contact__label">{{ social.label }}</span>
+                  <span class="contact__handle">{{ social.handle }}</span>
+                </span>
+                <app-icon name="arrow-up-right" [size]="16" />
+              </a>
+            </li>
+          }
+        </ul>
+
+        <div class="steps">
+          <h3 class="steps__title">{{ t().contact.stepsTitle }}</h3>
+          <ol class="steps__list">
+            @for (step of t().contact.steps; track step; let index = $index) {
+              <li><span class="steps__number">{{ index + 1 }}</span>{{ step }}</li>
+            }
+          </ol>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <p>© {{ year }} Tymoteusz Baran</p>
+  </div>
+</footer>

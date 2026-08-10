@@ -1,0 +1,112 @@
+@if (state() === 'sent') {
+  <div class="result" role="status">
+    <span class="result__icon result__icon--ok"><app-icon name="check" [size]="26" /></span>
+    <h3 class="result__title">{{ t().form.successTitle }}</h3>
+    <p class="result__body">
+      {{ t().form.successBodyBefore }}
+      <a [href]="'mailto:' + email">{{ email }}</a
+      >.
+    </p>
+    <button type="button" class="result__again" (click)="reset()">
+      {{ t().form.successAgain }}
+    </button>
+  </div>
+} @else {
+  <form class="form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="form__row">
+      <div class="field">
+        <label class="field__label" for="name">{{ t().form.name }}</label>
+        <input
+          id="name"
+          type="text"
+          class="field__input"
+          formControlName="name"
+          autocomplete="name"
+          [placeholder]="t().form.namePlaceholder"
+          [class.field__input--invalid]="showError(form.controls.name)"
+          [attr.aria-invalid]="showError(form.controls.name)"
+        />
+        @if (showError(form.controls.name)) {
+          <p class="field__error">{{ t().form.nameError }}</p>
+        }
+      </div>
+
+      <div class="field">
+        <label class="field__label" for="email">{{ t().form.email }}</label>
+        <input
+          id="email"
+          type="email"
+          class="field__input"
+          formControlName="email"
+          autocomplete="email"
+          [placeholder]="t().form.emailPlaceholder"
+          [class.field__input--invalid]="showError(form.controls.email)"
+          [attr.aria-invalid]="showError(form.controls.email)"
+        />
+        @if (showError(form.controls.email)) {
+          <p class="field__error">{{ t().form.emailError }}</p>
+        }
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="subject">{{ t().form.subject }}</label>
+      <select id="subject" class="field__input field__input--select" formControlName="subject">
+        @for (option of t().form.subjects; track option; let index = $index) {
+          <option [value]="index">{{ option }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="field">
+      <label class="field__label" for="message">
+        {{ t().form.message }}
+        <span class="field__counter">{{ messageLength() }} / {{ t().form.messageCounter }}</span>
+      </label>
+      <textarea
+        id="message"
+        class="field__input field__input--textarea"
+        formControlName="message"
+        rows="6"
+        [placeholder]="t().form.messagePlaceholder"
+        [class.field__input--invalid]="showError(form.controls.message)"
+        [attr.aria-invalid]="showError(form.controls.message)"
+      ></textarea>
+      @if (showError(form.controls.message)) {
+        <p class="field__error">{{ t().form.messageError }}</p>
+      }
+    </div>
+
+    <div class="field field--honeypot" aria-hidden="true">
+      <label for="company">{{ t().form.honeypot }}</label>
+      <input id="company" type="text" formControlName="company" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div class="consent">
+      <label class="consent__label">
+        <input type="checkbox" formControlName="consent" />
+        <span>{{ t().form.consent }}</span>
+      </label>
+      @if (showError(form.controls.consent)) {
+        <p class="field__error">{{ t().form.consentError }}</p>
+      }
+    </div>
+
+    @if (state() === 'error') {
+      <p class="form__error" role="alert">
+        <app-icon name="alert" [size]="18" />
+        {{ t().form.sendError }}
+        <a [href]="'mailto:' + email">{{ email }}</a
+        >.
+      </p>
+    }
+
+    <div class="form__footer">
+      <button type="submit" class="form__submit" [disabled]="state() === 'sending'">
+        {{ buttonLabel() }}
+        <app-icon name="arrow-up-right" [size]="17" />
+      </button>
+      <p class="form__note">{{ t().form.note }}</p>
+    </div>
+  </form>
+}

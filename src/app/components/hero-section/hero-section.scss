@@ -1,0 +1,225 @@
+.hero {
+  padding-top: clamp(56px, 9vw, 104px);
+  padding-bottom: 72px;
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
+}
+
+.hero__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 6px 13px 6px 11px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  color: var(--text-muted);
+}
+
+.hero__pulse {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #2fbf71;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #2fbf71;
+    opacity: 0.6;
+    animation: pulse 2.4s ease-out infinite;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
+  }
+  70%,
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+.hero__name {
+  margin-top: 22px;
+  font-size: clamp(2.5rem, 7vw, 4.25rem);
+  letter-spacing: -0.035em;
+}
+
+.hero__role {
+  margin-top: 18px;
+  max-width: 42ch;
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  color: var(--text);
+
+  strong {
+    font-weight: 600;
+    color: var(--accent);
+  }
+}
+
+.hero__lead {
+  margin-top: 16px;
+  max-width: 54ch;
+  color: var(--text-muted);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease,
+    color 0.16s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &--primary {
+    background: var(--accent);
+    color: #fff;
+
+    &:hover {
+      background: var(--accent-hover);
+    }
+  }
+
+  &--ghost {
+    border-color: var(--border-strong);
+    color: var(--text);
+
+    &:hover {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+  }
+}
+
+.hero__socials {
+  display: flex;
+  gap: 8px;
+  margin: 28px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  background: var(--bg-elevated);
+  transition:
+    color 0.16s ease,
+    border-color 0.16s ease,
+    transform 0.16s ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+    transform: translateY(-2px);
+  }
+}
+
+.hero__portrait {
+  position: relative;
+  justify-self: center;
+  width: min(340px, 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 14px -14px -14px 14px;
+    border: 1px solid var(--border-strong);
+    border-radius: var(--radius);
+  }
+
+  img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: cover;
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    filter: var(--photo-filter);
+    background: var(--bg-sunken);
+  }
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  margin: clamp(48px, 8vw, 88px) 0 0;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--border);
+  overflow: hidden;
+}
+
+.stats__item {
+  padding: 24px 26px;
+  background: var(--bg-elevated);
+}
+
+.stats__value {
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.stats__label {
+  margin: 4px 0 0;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 860px) {
+  .hero__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .hero__portrait {
+    order: -1;
+    justify-self: start;
+    width: min(220px, 60%);
+  }
+
+  .stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

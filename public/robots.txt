@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tymekb.github.io/portfolio-2026/sitemap.xml

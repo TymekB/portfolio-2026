@@ -1,0 +1,39 @@
+<header class="header" [class.header--scrolled]="scrolled()">
+  <div class="container header__inner">
+    <a class="brand" href="#top" (click)="closeMenu()">
+      <span class="brand__mark">TB</span>
+      <span class="brand__name">Tymoteusz Baran</span>
+    </a>
+
+    <nav class="nav" [class.nav--open]="menuOpen()" [attr.aria-label]="t().nav.projects">
+      @for (item of navItems(); track item.fragment) {
+        <a class="nav__link" [href]="'#' + item.fragment" (click)="closeMenu()">{{ item.label }}</a>
+      }
+      <a class="nav__cta" href="#kontakt" (click)="closeMenu()">{{ t().nav.cta }}</a>
+    </nav>
+
+    <div class="header__actions">
+      <button
+        type="button"
+        class="lang"
+        (click)="i18n.toggle()"
+        [attr.aria-label]="t().nav.switchTo"
+        [title]="t().nav.switchTo"
+      >
+        <span class="lang__code" [class.lang__code--active]="i18n.lang() === 'pl'">PL</span>
+        <span class="lang__divider" aria-hidden="true"></span>
+        <span class="lang__code" [class.lang__code--active]="i18n.lang() === 'en'">EN</span>
+      </button>
+
+      <button
+        type="button"
+        class="icon-button icon-button--menu"
+        (click)="toggleMenu()"
+        [attr.aria-expanded]="menuOpen()"
+        [attr.aria-label]="menuOpen() ? t().nav.closeMenu : t().nav.openMenu"
+      >
+        <span class="burger" [class.burger--open]="menuOpen()"></span>
+      </button>
+    </div>
+  </div>
+</header>

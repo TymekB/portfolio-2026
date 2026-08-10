@@ -1,0 +1,72 @@
+<section class="section" id="projekty">
+  <div class="container">
+    <p class="section-label">{{ t().projects.label }}</p>
+    <h2 class="section-title">{{ t().projects.title }}</h2>
+    <p class="section-lead">{{ t().projects.lead }}</p>
+
+    <div class="filters" role="tablist" [attr.aria-label]="t().projects.label">
+      @for (option of filters(); track option.value) {
+        <button
+          type="button"
+          role="tab"
+          class="filters__button"
+          [class.filters__button--active]="filter() === option.value"
+          [attr.aria-selected]="filter() === option.value"
+          (click)="select(option.value)"
+        >
+          {{ option.label }}
+        </button>
+      }
+    </div>
+
+    <ul class="projects">
+      @for (project of visibleProjects(); track project.id) {
+        <li class="project">
+          <div class="project__head">
+            <h3 class="project__name">{{ project.name }}</h3>
+            <span class="project__year">{{ project.year }}</span>
+          </div>
+
+          <p class="project__tagline">{{ t().projects.items[project.id].tagline }}</p>
+          <p class="project__description">{{ t().projects.items[project.id].description }}</p>
+
+          <ul class="project__tags">
+            @for (tag of project.tags; track tag) {
+              <li>{{ tag }}</li>
+            }
+          </ul>
+
+          @if (project.links.length) {
+            <div class="project__links">
+              @for (link of project.links; track link.url) {
+                <a
+                  class="project__link"
+                  [class.project__link--live]="link.kind === 'live'"
+                  [href]="link.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <app-icon [name]="link.kind === 'live' ? 'link' : 'github'" [size]="15" />
+                  {{ link.label ?? t().projects.sourceCode }}
+                  <app-icon name="arrow-up-right" [size]="14" />
+                </a>
+              }
+            </div>
+          } @else {
+            <p class="project__private">{{ t().projects.privateNote }}</p>
+          }
+        </li>
+      }
+    </ul>
+
+    <a
+      class="projects__more"
+      href="https://github.com/TymekB/"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {{ t().projects.more }}
+      <app-icon name="arrow-up-right" [size]="16" />
+    </a>
+  </div>
+</section>

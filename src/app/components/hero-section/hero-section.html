@@ -1,0 +1,68 @@
+<section class="hero" id="top">
+  <div class="container hero__inner">
+    <div class="hero__text">
+      <p class="hero__eyebrow">
+        <span class="hero__pulse" aria-hidden="true"></span>
+        {{ t().hero.badge }}
+      </p>
+
+      <h1 class="hero__name">Tymoteusz&nbsp;Baran</h1>
+
+      <p class="hero__role">
+        {{ t().hero.roleBefore }}<strong>{{ t().hero.roleHighlight }}</strong
+        >{{ t().hero.roleAfter }}
+      </p>
+
+      <p class="hero__lead">{{ t().hero.lead }}</p>
+
+      <div class="hero__actions">
+        <a class="button button--primary" href="#kontakt">
+          {{ t().hero.ctaPrimary }}
+          <app-icon name="arrow-up-right" [size]="17" />
+        </a>
+        <a class="button button--ghost" href="#projekty">{{ t().hero.ctaSecondary }}</a>
+      </div>
+
+      <ul class="hero__socials">
+        @for (social of socials; track social.url) {
+          <li>
+            <a
+              class="social"
+              [href]="social.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              [attr.aria-label]="social.label"
+            >
+              <app-icon [name]="social.icon" [size]="19" />
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+
+    <div class="hero__portrait">
+      <picture>
+        <source srcset="tymoteusz-baran.webp" type="image/webp" />
+        <img
+          src="tymoteusz-baran.jpg"
+          alt="Tymoteusz Baran"
+          width="720"
+          height="720"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </picture>
+    </div>
+  </div>
+
+  <div class="container">
+    <dl class="stats">
+      @for (stat of t().hero.stats; track stat.value) {
+        <div class="stats__item">
+          <dt class="stats__value">{{ stat.value }}</dt>
+          <dd class="stats__label">{{ stat.label }}</dd>
+        </div>
+      }
+    </dl>
+  </div>
+</section>
