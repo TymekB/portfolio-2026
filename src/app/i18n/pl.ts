@@ -154,9 +154,19 @@ export const pl = {
           'Aplikacja licząca wskaźnik PSG — odpowiednik PEG dla przychodów. Wyszukiwarka spółek z autouzupełnianiem, wykres trendu, kafelki wskaźników ze zmianą w zakresie, panel z ostatnimi wynikami finansowymi i konsensusem cen docelowych oraz zegary głównych giełd z sesyjnym statusem open/closed.',
       },
       oma: {
-        tagline: 'Strona gabinetu fizjoterapii ze sklepem',
+        tagline: 'Strona gabinetu fizjoterapii',
         description:
-          'Dwuczęściowy projekt: landing w Angularze zbudowany do statyków oraz sklep i panel na Syliusie. Wszystko serwowane z jednego kontenera FrankenPHP — landing pod „/", sklep pod „/sklep/", panel pod „/admin/".',
+          'Landing gabinetu w Angularze, zbudowany do statyków i serwowany pod „/" z tego samego kontenera FrankenPHP co sklep i panel. Prezentuje zabiegi, zespół i kontakt, a stąd prowadzi wejście do sklepu.',
+      },
+      omaStore: {
+        tagline: 'Sklep gabinetu na Syliusie',
+        description:
+          'Sklep pod „/sklep/" z olejkami, kosmetykami i voucherami na zabiegi. Katalog podzielony na pielęgnację, aromaterapię i vouchery, do tego koszyk, konta klientów i szablony Twiga przepisane pod identyfikację marki gabinetu.',
+      },
+      omaPanel: {
+        tagline: 'Zaplecze sklepu w panelu Syliusa',
+        description:
+          'Panel pod „/admin/" do prowadzenia sklepu: kafelki sprzedaży i klientów, wykres sprzedaży oraz opłaconych zamówień w zakresie dwóch tygodni, miesiąca i roku, katalog z produktami, magazynem i wariantami, obsługa zamówień, płatności i przesyłek.',
       },
     },
   },

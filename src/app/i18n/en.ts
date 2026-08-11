@@ -152,9 +152,19 @@ export const en: Dictionary = {
           'An app that computes the PSG ratio — a PEG equivalent for revenue. Company search with autocomplete, a trend chart, indicator tiles carrying their change over the selected range, a panel with the latest reported results and price-target consensus, plus clocks for the major exchanges with an open/closed session status.',
       },
       oma: {
-        tagline: 'Physiotherapy practice site with a store',
+        tagline: 'Physiotherapy practice site',
         description:
-          'A two-part project: an Angular landing page built to static files, plus a store and admin panel on Sylius. Everything is served from a single FrankenPHP container — the landing at “/”, the store at “/sklep/”, the panel at “/admin/”.',
+          'The practice landing page in Angular, built to static files and served at “/” from the same FrankenPHP container as the store and the panel. It presents treatments, the team and contact details, and hands visitors over to the store.',
+      },
+      omaStore: {
+        tagline: 'Practice store on Sylius',
+        description:
+          'A store at “/sklep/” selling oils, cosmetics and treatment vouchers. The catalogue splits into skincare, aromatherapy and vouchers, with a cart, customer accounts and Twig templates rewritten to match the practice’s brand.',
+      },
+      omaPanel: {
+        tagline: 'Store back office in the Sylius panel',
+        description:
+          'The panel at “/admin/” for running the store: sales and customer tiles, a chart of sales and paid orders across two weeks, a month and a year, a catalogue with products, inventory and variants, plus order, payment and shipment handling.',
       },
     },
   },

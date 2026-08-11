@@ -1,4 +1,4 @@
-export type ProjectId = 'labkawa' | 'psg' | 'oma';
+export type ProjectId = 'labkawa' | 'psg' | 'oma' | 'omaStore' | 'omaPanel';
 
 export interface ProjectLink {
   readonly url: string;
@@ -77,12 +77,24 @@ export const PROJECTS: readonly Project[] = [
     id: 'oma',
     name: 'OMA Kraków',
     year: '2026',
-    tags: ['Angular 22', 'Sylius 2.2', 'Symfony 7.4', 'FrankenPHP', 'MySQL'],
+    tags: ['Angular 22', 'TypeScript', 'SCSS', 'FrankenPHP'],
     links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
-    shots: [
-      { src: 'projects/oma-landing.webp', kind: 'landing', href: 'https://oma.pl/' },
-      { src: 'projects/oma-store.webp', kind: 'store' },
-      { src: 'projects/oma-panel.webp', kind: 'panel' },
-    ],
+    shots: [{ src: 'projects/oma-landing.webp', kind: 'landing', href: 'https://oma.pl/' }],
+  },
+  {
+    id: 'omaStore',
+    name: 'OMA Sklep',
+    year: '2026',
+    tags: ['Sylius 2.2', 'Symfony 7.4', 'Twig', 'MySQL', 'FrankenPHP'],
+    links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    shots: [{ src: 'projects/oma-store.webp', kind: 'store' }],
+  },
+  {
+    id: 'omaPanel',
+    name: 'OMA Panel administracyjny',
+    year: '2026',
+    tags: ['Sylius 2.2', 'Symfony 7.4', 'Doctrine', 'MySQL'],
+    links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    shots: [{ src: 'projects/oma-panel.webp', kind: 'panel' }],
   },
 ];
