@@ -8,7 +8,6 @@ const FROM_PACKAGE = [
   ['siPhp', 'PHP'],
   ['siSymfony', 'Symfony'],
   ['siDoctrine', 'Doctrine'],
-  ['siComposer', 'Composer'],
   ['siAngular', 'Angular'],
   ['siTypescript', 'TypeScript'],
   ['siReact', 'React'],
@@ -20,7 +19,6 @@ const FROM_PACKAGE = [
   ['siRabbitmq', 'RabbitMQ'],
   ['siDocker', 'Docker'],
   ['siNginx', 'nginx'],
-  ['siGrafana', 'Grafana'],
 ];
 
 /**
