@@ -122,8 +122,6 @@ export const pl = {
     label: 'Projekty',
     title: 'Wybrane rzeczy, które zbudowałem',
     lead: 'Projekty własne i produkcyjne. Część działa publicznie pod własną domeną, część ma otwarty kod na GitHubie.',
-    filterFeatured: 'Wyróżnione',
-    filterAll: 'Wszystkie',
     sourceCode: 'Kod źródłowy',
     privateNote: 'Projekt prywatny — chętnie opowiem o szczegółach',
     more: 'Wszystkie repozytoria na GitHubie',
@@ -159,41 +157,6 @@ export const pl = {
         tagline: 'Strona gabinetu fizjoterapii ze sklepem',
         description:
           'Dwuczęściowy projekt: landing w Angularze zbudowany do statyków oraz sklep i panel na Syliusie. Wszystko serwowane z jednego kontenera FrankenPHP — landing pod „/", sklep pod „/sklep/", panel pod „/admin/".',
-      },
-      stockx: {
-        tagline: 'Alerty cenowe dla katalogu StockX',
-        description:
-          'Użytkownik ustawia price target na produkcie i dostaje maila, gdy „lowest ask" spadnie do progu. Backend w architekturze heksagonalnej z DDD i CQRS, cykliczny import katalogu przez Symfony Scheduler, wysyłka przez Messenger.',
-      },
-      lalewicz: {
-        tagline: 'Platforma nauki angielskiego z native speakerami',
-        description:
-          'Frontend platformy lekcji online: wybór lektora, rezerwacja terminu, konto ucznia i wideopokój lekcji. Zero zależności runtime poza Angularem — bez UI kitów i bibliotek stanu.',
-      },
-      frankenphp: {
-        tagline: 'Benchmark wydajności dwóch stacków',
-        description:
-          'Porównanie FrankenPHP w trybie worker z klasycznym PHP-FPM i Nginx — najpierw na aplikacji syntetycznej, potem na kodzie produkcyjnym z autoryzacją i bazą. Pomiary k6 zbierane do InfluxDB i wizualizowane w Grafanie. Lekkie endpointy 5–7× szybciej, ciężkie na remis, ale z wyraźnie krótszym ogonem latencji.',
-      },
-      wallstreet: {
-        tagline: 'Portal finansowy w stylu Yahoo Finance',
-        description:
-          'Portal z notowaniami i newsami rynkowymi: pasek indeksów, reużywalne mini-wykresy SVG, pigułki z symbolem i zmianą procentową, układ wielokolumnowy z sidebarem.',
-      },
-      worktimer: {
-        tagline: 'Licznik czasu pracy w pasku menu macOS',
-        description:
-          'Natywna aplikacja macOS licząca czas pracy na podstawie aktywności klawiatury i myszy — z wykrywaniem pracy w tle, progiem bezczynności, dziennym resetem i tygodniową statystyką. Instaluje się jako LaunchAgent, więc wstaje po logowaniu i restartuje się sama.',
-      },
-      precommit: {
-        tagline: 'Hooki pre-commit dla projektów PHP',
-        description:
-          'Zestaw skryptów pre-commit gotowych do wpięcia w dowolny projekt PHP — lint, coding standards i statyczna analiza uruchamiane zanim kod trafi do repozytorium.',
-      },
-      dario: {
-        tagline: 'Zestaw narzędzi do Claude Code',
-        description:
-          'Skills i agenci rozszerzający Claude Code o konwencje zespołu: generowanie commitów i merge requestów, code review, inicjalizacja zadań z Redmine, ADR-y i dokumentacja techniczna. Instalacja w projekcie jednym skryptem synchronizującym.',
       },
     },
   },

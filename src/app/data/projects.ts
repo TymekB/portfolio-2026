@@ -1,14 +1,4 @@
-export type ProjectId =
-  | 'labkawa'
-  | 'psg'
-  | 'oma'
-  | 'stockx'
-  | 'lalewicz'
-  | 'frankenphp'
-  | 'wallstreet'
-  | 'worktimer'
-  | 'precommit'
-  | 'dario';
+export type ProjectId = 'labkawa' | 'psg' | 'oma';
 
 export interface ProjectLink {
   readonly url: string;
@@ -41,7 +31,6 @@ export interface Project {
   readonly tags: readonly string[];
   readonly links: readonly ProjectLink[];
   readonly shots: readonly ProjectShot[];
-  readonly featured: boolean;
 }
 
 export const PROJECTS: readonly Project[] = [
@@ -72,7 +61,6 @@ export const PROJECTS: readonly Project[] = [
         href: 'https://labkawa.pl/punkty-pobran',
       },
     ],
-    featured: true,
   },
   {
     id: 'psg',
@@ -84,7 +72,6 @@ export const PROJECTS: readonly Project[] = [
       { src: 'projects/psg-app.webp', kind: 'app', href: 'https://psg-calculator.com/' },
       { src: 'projects/psg-dark.webp', kind: 'dark', href: 'https://psg-calculator.com/' },
     ],
-    featured: true,
   },
   {
     id: 'oma',
@@ -94,71 +81,8 @@ export const PROJECTS: readonly Project[] = [
     links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
     shots: [
       { src: 'projects/oma-landing.webp', kind: 'landing', href: 'https://oma.pl/' },
+      { src: 'projects/oma-store.webp', kind: 'store' },
       { src: 'projects/oma-panel.webp', kind: 'panel' },
     ],
-    featured: true,
-  },
-  {
-    id: 'stockx',
-    name: 'StockX Monitoring',
-    year: '2026',
-    tags: ['Symfony 7', 'PHP 8.4', 'DDD', 'CQRS', 'PostgreSQL', 'Angular 20'],
-    links: [],
-    shots: [],
-    featured: true,
-  },
-  {
-    id: 'lalewicz',
-    name: 'Lalewicz English',
-    year: '2026',
-    tags: ['Angular 22', 'TypeScript 6', 'SCSS'],
-    links: [{ url: 'https://github.com/TymekB/lalewicz-english', kind: 'code' }],
-    shots: [],
-    featured: false,
-  },
-  {
-    id: 'frankenphp',
-    name: 'FrankenPHP vs PHP-FPM',
-    year: '2025',
-    tags: ['FrankenPHP', 'Symfony 7.2', 'k6', 'InfluxDB', 'Grafana'],
-    links: [],
-    shots: [],
-    featured: false,
-  },
-  {
-    id: 'wallstreet',
-    name: 'Droga do Wallstreet',
-    year: '2025',
-    tags: ['Angular 17', 'Signals', 'SVG', 'SCSS'],
-    links: [{ url: 'https://github.com/TymekB/droga-do-wallstreet', kind: 'code' }],
-    shots: [],
-    featured: false,
-  },
-  {
-    id: 'worktimer',
-    name: 'WorkTimer',
-    year: '2025',
-    tags: ['Swift', 'macOS', 'LaunchAgent'],
-    links: [{ url: 'https://github.com/TymekB/work-timer', kind: 'code' }],
-    shots: [],
-    featured: false,
-  },
-  {
-    id: 'precommit',
-    name: 'pre-commit-php',
-    year: '2019',
-    tags: ['Shell', 'PHP', 'Open source'],
-    links: [{ url: 'https://github.com/TymekB/pre-commit-php', kind: 'code' }],
-    shots: [],
-    featured: false,
-  },
-  {
-    id: 'dario',
-    name: 'DarIO AI',
-    year: '2026',
-    tags: ['Claude Code', 'Automation', 'DX'],
-    links: [],
-    shots: [],
-    featured: false,
   },
 ];

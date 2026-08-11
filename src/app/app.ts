@@ -28,9 +28,9 @@ import { StackSection } from './components/stack-section/stack-section';
     <main>
       <app-hero-section />
       <app-services-section />
+      <app-projects-section />
       <app-about-section />
       <app-stack-section />
-      <app-projects-section />
       <app-contact-section />
     </main>
   `,

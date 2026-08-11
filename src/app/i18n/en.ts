@@ -120,8 +120,6 @@ export const en: Dictionary = {
     label: 'Projects',
     title: 'Selected things I have built',
     lead: 'Personal and production projects. Some run publicly on their own domain, some have their source open on GitHub.',
-    filterFeatured: 'Featured',
-    filterAll: 'All',
     sourceCode: 'Source code',
     privateNote: 'Private project — happy to walk through the details',
     more: 'All repositories on GitHub',
@@ -157,41 +155,6 @@ export const en: Dictionary = {
         tagline: 'Physiotherapy practice site with a store',
         description:
           'A two-part project: an Angular landing page built to static files, plus a store and admin panel on Sylius. Everything is served from a single FrankenPHP container — the landing at “/”, the store at “/sklep/”, the panel at “/admin/”.',
-      },
-      stockx: {
-        tagline: 'Price alerts for the StockX catalogue',
-        description:
-          'A user sets a price target on a product and gets an email when the lowest ask drops to that threshold. The backend uses hexagonal architecture with DDD and CQRS, the catalogue is imported on a schedule via Symfony Scheduler and mail goes out through Messenger.',
-      },
-      lalewicz: {
-        tagline: 'English learning platform with native speakers',
-        description:
-          'The frontend of an online lesson platform: tutor selection, slot booking, student accounts and a lesson video room. Zero runtime dependencies beyond Angular — no UI kits, no state libraries.',
-      },
-      frankenphp: {
-        tagline: 'Performance benchmark of two stacks',
-        description:
-          'A comparison of FrankenPHP in worker mode against classic PHP-FPM with Nginx — first on a synthetic application, then on production code with authorisation and a database. k6 measurements collected into InfluxDB and visualised in Grafana. Light endpoints 5–7× faster, heavy ones a draw, but with a markedly shorter latency tail.',
-      },
-      wallstreet: {
-        tagline: 'Yahoo Finance-style market portal',
-        description:
-          'A portal with quotes and market news: an index bar, reusable SVG sparklines, pills combining symbol and percentage change, and a multi-column layout with a sidebar.',
-      },
-      worktimer: {
-        tagline: 'Work timer in the macOS menu bar',
-        description:
-          'A native macOS app that tracks working time from keyboard and mouse activity — with background-work detection, an idle threshold, a daily reset and weekly stats. It installs as a LaunchAgent, so it starts at login and restarts itself.',
-      },
-      precommit: {
-        tagline: 'Pre-commit hooks for PHP projects',
-        description:
-          'A set of pre-commit scripts ready to drop into any PHP project — linting, coding standards and static analysis run before code reaches the repository.',
-      },
-      dario: {
-        tagline: 'Tooling for Claude Code',
-        description:
-          'Skills and agents that extend Claude Code with team conventions: generating commits and merge requests, code review, task initialisation from Redmine, ADRs and technical documentation. Installs into a project with a single sync script.',
       },
     },
   },

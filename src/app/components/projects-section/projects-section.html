@@ -4,22 +4,7 @@
     <h2 class="section-title">{{ t().projects.title }}</h2>
     <p class="section-lead">{{ t().projects.lead }}</p>
 
-    <div class="filters" role="tablist" [attr.aria-label]="t().projects.label">
-      @for (option of filters(); track option.value) {
-        <button
-          type="button"
-          role="tab"
-          class="filters__button"
-          [class.filters__button--active]="filter() === option.value"
-          [attr.aria-selected]="filter() === option.value"
-          (click)="select(option.value)"
-        >
-          {{ option.label }}
-        </button>
-      }
-    </div>
-
-    <app-project-showcase [projects]="visibleProjects()" />
+    <app-project-showcase [projects]="projects" />
 
     <a
       class="projects__more"

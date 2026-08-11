@@ -1,38 +1,5 @@
-.filters {
-  display: inline-flex;
-  gap: 3px;
-  margin-top: 32px;
-  padding: 3px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--bg-elevated);
-}
-
-.filters__button {
-  padding: 7px 15px;
-  border-radius: 7px;
-  font-size: 0.875rem;
-  color: var(--text-muted);
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-
-  &:hover {
-    color: var(--text);
-  }
-
-  &--active {
-    background: var(--text);
-    color: var(--bg);
-
-    &:hover {
-      color: var(--bg);
-    }
-  }
-}
-
 app-project-showcase {
-  margin-top: 26px;
+  margin-top: 32px;
 }
 
 .projects__more {
