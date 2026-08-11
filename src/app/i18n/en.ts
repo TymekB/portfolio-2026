@@ -120,7 +120,6 @@ export const en: Dictionary = {
     label: 'Projects',
     title: 'Selected things I have built',
     lead: 'Personal and production projects. Some run publicly on their own domain, some have their source open on GitHub.',
-    sourceCode: 'Source code',
     privateNote: 'Private project — happy to walk through the details',
     more: 'All repositories on GitHub',
     shots: {

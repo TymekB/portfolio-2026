@@ -58,14 +58,13 @@
               @for (link of project.links; track link.url) {
                 <a
                   class="slide__link"
-                  [class.slide__link--live]="link.kind === 'live'"
                   [href]="link.url"
                   target="_blank"
                   rel="noopener noreferrer"
                   [attr.tabindex]="slide === index() ? null : -1"
                 >
-                  <app-icon [name]="link.kind === 'live' ? 'link' : 'github'" [size]="15" />
-                  {{ link.label ?? t().projects.sourceCode }}
+                  <app-icon name="link" [size]="15" />
+                  {{ link.label }}
                   <app-icon name="arrow-up-right" [size]="14" />
                 </a>
               }

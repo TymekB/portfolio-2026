@@ -2,9 +2,8 @@ export type ProjectId = 'labkawa' | 'psg' | 'oma' | 'omaStore' | 'omaPanel';
 
 export interface ProjectLink {
   readonly url: string;
-  readonly kind: 'live' | 'code';
-  /** Wypełniane tylko dla `kind: 'live'` — nazwa domeny nie podlega tłumaczeniu. */
-  readonly label?: string;
+  /** Nazwa domeny nie podlega tłumaczeniu. */
+  readonly label: string;
 }
 
 export type ProjectShotKind =
@@ -39,10 +38,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'LabKawa',
     year: '2026',
     tags: ['Angular 18', 'Signals', 'Standalone components', 'SCSS'],
-    links: [
-      { url: 'https://labkawa.pl/', kind: 'live', label: 'labkawa.pl' },
-      { url: 'https://github.com/TymekB/labkawa', kind: 'code' },
-    ],
+    links: [{ url: 'https://labkawa.pl/', label: 'labkawa.pl' }],
     shots: [
       { src: 'projects/labkawa-landing.webp', kind: 'landing', href: 'https://labkawa.pl/' },
       {
@@ -67,7 +63,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'PSG Calculator',
     year: '2026',
     tags: ['Angular', 'ECharts', 'FMP API', 'Docker', 'Sentry'],
-    links: [{ url: 'https://psg-calculator.com/', kind: 'live', label: 'psg-calculator.com' }],
+    links: [{ url: 'https://psg-calculator.com/', label: 'psg-calculator.com' }],
     shots: [
       { src: 'projects/psg-app.webp', kind: 'app', href: 'https://psg-calculator.com/' },
       { src: 'projects/psg-dark.webp', kind: 'dark', href: 'https://psg-calculator.com/' },
@@ -78,7 +74,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'OMA Kraków',
     year: '2026',
     tags: ['Angular 22', 'TypeScript', 'SCSS', 'FrankenPHP'],
-    links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    links: [],
     shots: [{ src: 'projects/oma-landing.webp', kind: 'landing', href: 'https://oma.pl/' }],
   },
   {
@@ -86,7 +82,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'OMA Sklep',
     year: '2026',
     tags: ['Sylius 2.2', 'Symfony 7.4', 'Twig', 'MySQL', 'FrankenPHP'],
-    links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    links: [],
     shots: [{ src: 'projects/oma-store.webp', kind: 'store' }],
   },
   {
@@ -94,7 +90,7 @@ export const PROJECTS: readonly Project[] = [
     name: 'OMA Panel administracyjny',
     year: '2026',
     tags: ['Sylius 2.2', 'Symfony 7.4', 'Doctrine', 'MySQL'],
-    links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    links: [],
     shots: [{ src: 'projects/oma-panel.webp', kind: 'panel' }],
   },
 ];

@@ -122,7 +122,6 @@ export const pl = {
     label: 'Projekty',
     title: 'Wybrane rzeczy, które zbudowałem',
     lead: 'Projekty własne i produkcyjne. Część działa publicznie pod własną domeną, część ma otwarty kod na GitHubie.',
-    sourceCode: 'Kod źródłowy',
     privateNote: 'Projekt prywatny — chętnie opowiem o szczegółach',
     more: 'Wszystkie repozytoria na GitHubie',
     shots: {
