@@ -1,7 +1,9 @@
 .logos {
+  --logo-columns: 7;
+  --logo-gap: 10px;
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: var(--logo-gap);
   margin: 44px 0 0;
   padding: 0;
   list-style: none;
@@ -12,9 +14,7 @@
   justify-items: center;
   align-content: center;
   gap: 10px;
-  flex: 1 1 106px;
-  min-width: 106px;
-  max-width: 160px;
+  flex: 1 1 calc((100% - (var(--logo-columns) - 1) * var(--logo-gap)) / var(--logo-columns));
   padding: 20px 10px 17px;
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -92,5 +92,17 @@
   &:hover {
     color: var(--accent);
     border-color: var(--accent);
+  }
+}
+
+@media (max-width: 900px) {
+  .logos {
+    --logo-columns: 5;
+  }
+}
+
+@media (max-width: 560px) {
+  .logos {
+    --logo-columns: 3;
   }
 }

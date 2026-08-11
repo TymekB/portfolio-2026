@@ -12,7 +12,6 @@ const FROM_PACKAGE = [
   ['siTypescript', 'TypeScript'],
   ['siReact', 'React'],
   ['siNodedotjs', 'Node.js'],
-  ['siPostgresql', 'PostgreSQL'],
   ['siMysql', 'MySQL'],
   ['siRedis', 'Redis'],
   ['siElasticsearch', 'Elasticsearch'],

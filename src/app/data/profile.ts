@@ -84,7 +84,6 @@ export const STACK: readonly StackGroup[] = [
   {
     key: 'infrastructure',
     items: [
-      'PostgreSQL',
       'MySQL',
       'Elasticsearch',
       'Redis',
