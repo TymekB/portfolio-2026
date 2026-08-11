@@ -33,11 +33,18 @@
 
 .projects {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 18px;
+  grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+  align-items: start;
+  gap: 22px;
   margin: 28px 0 0;
   padding: 0;
   list-style: none;
+}
+
+@media (max-width: 520px) {
+  .projects {
+    grid-template-columns: 1fr;
+  }
 }
 
 .project {

@@ -1,10 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  DestroyRef,
   computed,
   inject,
   input,
   linkedSignal,
+  signal,
 } from '@angular/core';
 
 import { I18n } from '../../i18n/i18n';
@@ -12,6 +14,7 @@ import { Icon } from '../../shared/icon';
 import type { ProjectShot } from '../../data/projects';
 
 const SWIPE_THRESHOLD_PX = 40;
+const AUTOPLAY_INTERVAL_MS = 5000;
 
 @Component({
   selector: 'app-project-gallery',
@@ -35,7 +38,15 @@ export class ProjectGallery {
   protected readonly hasControls = computed(() => this.shots().length > 1);
   protected readonly offset = computed(() => `translateX(-${this.index() * 100}%)`);
 
+  private readonly animated = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  private readonly held = signal(false);
+  private timer: ReturnType<typeof setInterval> | null = null;
   private swipeStartX: number | null = null;
+
+  constructor() {
+    this.startAutoplay();
+    inject(DestroyRef).onDestroy(() => this.stopAutoplay());
+  }
 
   protected caption(shot: ProjectShot): string {
     return this.t().projects.shots[shot.kind];
@@ -46,8 +57,12 @@ export class ProjectGallery {
   }
 
   protected go(target: number): void {
-    const total = this.shots().length;
-    this.index.set(((target % total) + total) % total);
+    this.slideTo(target);
+    this.startAutoplay();
+  }
+
+  protected hold(holding: boolean): void {
+    this.held.set(holding);
   }
 
   protected onSwipeStart(event: PointerEvent): void {
@@ -71,5 +86,30 @@ export class ProjectGallery {
     }
 
     this.go(this.index() + (distance < 0 ? 1 : -1));
+  }
+
+  private slideTo(target: number): void {
+    const total = this.shots().length;
+    this.index.set(((target % total) + total) % total);
+  }
+
+  private startAutoplay(): void {
+    if (!this.animated) {
+      return;
+    }
+
+    this.stopAutoplay();
+    this.timer = setInterval(() => {
+      if (this.hasControls() && !this.held()) {
+        this.slideTo(this.index() + 1);
+      }
+    }, AUTOPLAY_INTERVAL_MS);
+  }
+
+  private stopAutoplay(): void {
+    if (this.timer !== null) {
+      clearInterval(this.timer);
+      this.timer = null;
+    }
   }
 }

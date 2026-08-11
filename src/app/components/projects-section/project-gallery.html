@@ -6,6 +6,10 @@
   (pointerdown)="onSwipeStart($event)"
   (pointerup)="onSwipeEnd($event)"
   (pointercancel)="onSwipeCancel()"
+  (mouseenter)="hold(true)"
+  (mouseleave)="hold(false)"
+  (focusin)="hold(true)"
+  (focusout)="hold(false)"
   (keydown.arrowLeft)="go(index() - 1)"
   (keydown.arrowRight)="go(index() + 1)"
 >
@@ -22,20 +26,38 @@
           decoding="async"
           draggable="false"
         />
+      </div>
+    }
+  </div>
 
-        @if (shot.href) {
-          <a
-            class="gallery__caption gallery__caption--link"
-            [href]="shot.href"
-            target="_blank"
-            rel="noopener noreferrer"
-            [attr.tabindex]="slide === index() ? null : -1"
-          >
-            {{ caption(shot) }}
-            <app-icon name="arrow-up-right" [size]="12" />
-          </a>
-        } @else {
-          <span class="gallery__caption">{{ caption(shot) }}</span>
+  <div class="gallery__bar">
+    @let shot = shots()[index()];
+
+    @if (shot.href) {
+      <a
+        class="gallery__caption gallery__caption--link"
+        [href]="shot.href"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {{ caption(shot) }}
+        <app-icon name="arrow-up-right" [size]="12" />
+      </a>
+    } @else {
+      <span class="gallery__caption">{{ caption(shot) }}</span>
+    }
+
+    @if (hasControls()) {
+      <div class="gallery__dots">
+        @for (dot of shots(); track dot.src; let slide = $index) {
+          <button
+            type="button"
+            class="gallery__dot"
+            [class.gallery__dot--active]="slide === index()"
+            [attr.aria-label]="caption(dot)"
+            [attr.aria-current]="slide === index() ? 'true' : null"
+            (click)="go(slide)"
+          ></button>
         }
       </div>
     }
@@ -48,7 +70,7 @@
       [attr.aria-label]="t().projects.gallery.previous"
       (click)="go(index() - 1)"
     >
-      <app-icon name="chevron-left" [size]="16" />
+      <app-icon name="chevron-left" [size]="18" />
     </button>
 
     <button
@@ -57,20 +79,7 @@
       [attr.aria-label]="t().projects.gallery.next"
       (click)="go(index() + 1)"
     >
-      <app-icon name="chevron-right" [size]="16" />
+      <app-icon name="chevron-right" [size]="18" />
     </button>
-
-    <div class="gallery__dots">
-      @for (shot of shots(); track shot.src; let slide = $index) {
-        <button
-          type="button"
-          class="gallery__dot"
-          [class.gallery__dot--active]="slide === index()"
-          [attr.aria-label]="caption(shot)"
-          [attr.aria-current]="slide === index() ? 'true' : null"
-          (click)="go(slide)"
-        ></button>
-      }
-    </div>
   }
 </div>
