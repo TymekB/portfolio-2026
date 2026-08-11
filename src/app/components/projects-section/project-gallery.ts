@@ -37,11 +37,15 @@ export class ProjectGallery {
 
   protected readonly hasControls = computed(() => this.shots().length > 1);
   protected readonly offset = computed(() => `translateX(-${this.index() * 100}%)`);
+  protected readonly current = computed(() => this.shots()[this.index()]);
+  protected readonly paused = signal(false);
 
   private readonly animated = !matchMedia('(prefers-reduced-motion: reduce)').matches;
   private readonly held = signal(false);
   private timer: ReturnType<typeof setInterval> | null = null;
   private swipeStartX: number | null = null;
+
+  protected readonly canAutoplay = computed(() => this.animated && this.hasControls());
 
   constructor() {
     this.startAutoplay();
@@ -59,6 +63,10 @@ export class ProjectGallery {
   protected go(target: number): void {
     this.slideTo(target);
     this.startAutoplay();
+  }
+
+  protected togglePlayback(): void {
+    this.paused.update((paused) => !paused);
   }
 
   protected hold(holding: boolean): void {
@@ -100,7 +108,7 @@ export class ProjectGallery {
 
     this.stopAutoplay();
     this.timer = setInterval(() => {
-      if (this.hasControls() && !this.held()) {
+      if (this.hasControls() && !this.held() && !this.paused()) {
         this.slideTo(this.index() + 1);
       }
     }, AUTOPLAY_INTERVAL_MS);

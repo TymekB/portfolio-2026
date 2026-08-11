@@ -130,11 +130,17 @@ export const en: Dictionary = {
       store: 'Store',
       panel: 'Admin panel',
       app: 'Application',
+      catalogue: 'Test catalogue',
+      packages: 'Test packages',
+      locations: 'Collection points',
+      dark: 'Dark mode',
     },
     gallery: {
       roleDescription: 'screenshot carousel',
       previous: 'Previous screenshot',
       next: 'Next screenshot',
+      pause: 'Pause the carousel',
+      play: 'Resume the carousel',
     },
     items: {
       labkawa: {

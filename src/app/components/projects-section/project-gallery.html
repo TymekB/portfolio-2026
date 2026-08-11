@@ -31,35 +31,30 @@
   </div>
 
   <div class="gallery__bar">
-    @let shot = shots()[index()];
-
-    @if (shot.href) {
+    @if (current().href) {
       <a
         class="gallery__caption gallery__caption--link"
-        [href]="shot.href"
+        [href]="current().href"
         target="_blank"
         rel="noopener noreferrer"
       >
-        {{ caption(shot) }}
+        {{ caption(current()) }}
         <app-icon name="arrow-up-right" [size]="12" />
       </a>
     } @else {
-      <span class="gallery__caption">{{ caption(shot) }}</span>
+      <span class="gallery__caption">{{ caption(current()) }}</span>
     }
 
-    @if (hasControls()) {
-      <div class="gallery__dots">
-        @for (dot of shots(); track dot.src; let slide = $index) {
-          <button
-            type="button"
-            class="gallery__dot"
-            [class.gallery__dot--active]="slide === index()"
-            [attr.aria-label]="caption(dot)"
-            [attr.aria-current]="slide === index() ? 'true' : null"
-            (click)="go(slide)"
-          ></button>
-        }
-      </div>
+    @if (canAutoplay()) {
+      <button
+        type="button"
+        class="gallery__playback"
+        [attr.aria-label]="paused() ? t().projects.gallery.play : t().projects.gallery.pause"
+        [attr.aria-pressed]="paused()"
+        (click)="togglePlayback()"
+      >
+        <app-icon [name]="paused() ? 'play' : 'pause'" [size]="13" />
+      </button>
     }
   </div>
 
@@ -83,3 +78,29 @@
     </button>
   }
 </div>
+
+@if (hasControls()) {
+  <div class="rail" (mouseenter)="hold(true)" (mouseleave)="hold(false)">
+    @for (shot of shots(); track shot.src; let slide = $index) {
+      <button
+        type="button"
+        class="rail__item"
+        [class.rail__item--active]="slide === index()"
+        [attr.aria-current]="slide === index() ? 'true' : null"
+        (click)="go(slide)"
+      >
+        <img
+          class="rail__image"
+          [src]="shot.src"
+          [alt]="alt(shot)"
+          width="1200"
+          height="680"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+        <span class="rail__label">{{ caption(shot) }}</span>
+      </button>
+    }
+  </div>
+}

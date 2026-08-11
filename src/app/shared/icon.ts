@@ -8,6 +8,8 @@ export type IconName =
   | 'arrow-up-right'
   | 'chevron-left'
   | 'chevron-right'
+  | 'pause'
+  | 'play'
   | 'link'
   | 'check'
   | 'alert'
@@ -65,6 +67,12 @@ export type IconName =
         }
         @case ('chevron-right') {
           <path d="M9.5 5.5 16 12l-6.5 6.5" />
+        }
+        @case ('pause') {
+          <path fill="currentColor" stroke="none" d="M8 5.5h2.6v13H8zM13.4 5.5H16v13h-2.6z" />
+        }
+        @case ('play') {
+          <path fill="currentColor" stroke="none" d="M8.5 5.2 18.5 12l-10 6.8z" />
         }
         @case ('link') {
           <path d="M10 13.5a3.6 3.6 0 0 0 5.4.4l2.6-2.6a3.6 3.6 0 0 0-5.1-5.1l-1.5 1.5" />

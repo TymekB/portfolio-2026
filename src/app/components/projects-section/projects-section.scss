@@ -71,7 +71,8 @@
   }
 
   app-project-gallery {
-    display: block;
+    --gallery-inset: 26px;
+
     margin: 0 -26px 22px;
   }
 }

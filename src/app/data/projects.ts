@@ -17,7 +17,15 @@ export interface ProjectLink {
   readonly label?: string;
 }
 
-export type ProjectShotKind = 'landing' | 'store' | 'panel' | 'app';
+export type ProjectShotKind =
+  | 'landing'
+  | 'store'
+  | 'panel'
+  | 'app'
+  | 'catalogue'
+  | 'packages'
+  | 'locations'
+  | 'dark';
 
 export interface ProjectShot {
   readonly src: string;
@@ -47,10 +55,21 @@ export const PROJECTS: readonly Project[] = [
       { url: 'https://github.com/TymekB/labkawa', kind: 'code' },
     ],
     shots: [
+      { src: 'projects/labkawa-landing.webp', kind: 'landing', href: 'https://labkawa.pl/' },
       {
-        src: 'projects/labkawa-landing.webp',
-        kind: 'landing',
-        href: 'https://labkawa.pl/',
+        src: 'projects/labkawa-catalogue.webp',
+        kind: 'catalogue',
+        href: 'https://labkawa.pl/badania',
+      },
+      {
+        src: 'projects/labkawa-packages.webp',
+        kind: 'packages',
+        href: 'https://labkawa.pl/pakiety',
+      },
+      {
+        src: 'projects/labkawa-locations.webp',
+        kind: 'locations',
+        href: 'https://labkawa.pl/punkty-pobran',
       },
     ],
     featured: true,
@@ -62,11 +81,8 @@ export const PROJECTS: readonly Project[] = [
     tags: ['Angular', 'ECharts', 'FMP API', 'Docker', 'Sentry'],
     links: [{ url: 'https://psg-calculator.com/', kind: 'live', label: 'psg-calculator.com' }],
     shots: [
-      {
-        src: 'projects/psg-app.webp',
-        kind: 'app',
-        href: 'https://psg-calculator.com/',
-      },
+      { src: 'projects/psg-app.webp', kind: 'app', href: 'https://psg-calculator.com/' },
+      { src: 'projects/psg-dark.webp', kind: 'dark', href: 'https://psg-calculator.com/' },
     ],
     featured: true,
   },
@@ -77,11 +93,7 @@ export const PROJECTS: readonly Project[] = [
     tags: ['Angular 22', 'Sylius 2.2', 'Symfony 7.4', 'FrankenPHP', 'MySQL'],
     links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
     shots: [
-      {
-        src: 'projects/oma-landing.webp',
-        kind: 'landing',
-        href: 'https://oma.pl/',
-      },
+      { src: 'projects/oma-landing.webp', kind: 'landing', href: 'https://oma.pl/' },
       { src: 'projects/oma-panel.webp', kind: 'panel' },
     ],
     featured: true,

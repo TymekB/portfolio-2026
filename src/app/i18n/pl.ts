@@ -132,11 +132,17 @@ export const pl = {
       store: 'Sklep',
       panel: 'Panel administracyjny',
       app: 'Aplikacja',
+      catalogue: 'Katalog badań',
+      packages: 'Pakiety badań',
+      locations: 'Punkty pobrań',
+      dark: 'Tryb ciemny',
     },
     gallery: {
       roleDescription: 'karuzela zrzutów ekranu',
       previous: 'Poprzedni zrzut ekranu',
       next: 'Następny zrzut ekranu',
+      pause: 'Zatrzymaj przewijanie',
+      play: 'Wznów przewijanie',
     },
     items: {
       labkawa: {
