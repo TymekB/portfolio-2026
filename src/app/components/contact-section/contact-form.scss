@@ -1,6 +1,13 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
 .form {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 18px;
+  height: 100%;
   padding: 30px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
@@ -16,6 +23,12 @@
 .field {
   display: grid;
   gap: 7px;
+
+  &--message {
+    flex: 1;
+    min-height: 0;
+    grid-template-rows: auto minmax(130px, 1fr);
+  }
 
   &--honeypot {
     position: absolute;
@@ -179,8 +192,10 @@
 
 .result {
   display: grid;
+  align-content: start;
   justify-items: start;
   gap: 10px;
+  height: 100%;
   padding: 40px 30px;
   border: 1px solid var(--border);
   border-radius: var(--radius);
