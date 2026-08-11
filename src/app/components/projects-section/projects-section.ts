@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 
 import { I18n } from '../../i18n/i18n';
 import { Icon } from '../../shared/icon';
-import { ProjectGallery } from './project-gallery';
+import { ProjectShowcase } from './project-showcase';
 import { PROJECTS } from '../../data/projects';
 
 type Filter = 'featured' | 'all';
@@ -10,7 +10,7 @@ type Filter = 'featured' | 'all';
 @Component({
   selector: 'app-projects-section',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Icon, ProjectGallery],
+  imports: [Icon, ProjectShowcase],
   templateUrl: './projects-section.html',
   styleUrl: './projects-section.scss',
 })

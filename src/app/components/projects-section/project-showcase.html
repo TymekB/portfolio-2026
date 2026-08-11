@@ -1,0 +1,189 @@
+<div
+  class="showcase"
+  role="group"
+  [attr.aria-roledescription]="hasControls() ? t().projects.gallery.roleDescription : null"
+  [attr.aria-label]="t().projects.label"
+  (pointerdown)="onSwipeStart($event)"
+  (pointerup)="onSwipeEnd($event)"
+  (pointercancel)="onSwipeCancel()"
+  (mouseenter)="hold(true)"
+  (mouseleave)="hold(false)"
+  (focusin)="hold(true)"
+  (focusout)="hold(false)"
+  (keydown.arrowLeft)="go(index() - 1)"
+  (keydown.arrowRight)="go(index() + 1)"
+>
+  <div class="showcase__track" [style.transform]="offset()">
+    @for (project of projects(); track project.id; let slide = $index) {
+      <article class="slide" [attr.aria-hidden]="slide === index() ? null : 'true'">
+        <div class="slide__media">
+          @let shot = slideShot(project, slide);
+
+          @if (shot) {
+            <img
+              class="slide__image"
+              [src]="shot.src"
+              [alt]="alt(project, shot)"
+              width="1200"
+              height="680"
+              [attr.loading]="slide === 0 ? null : 'lazy'"
+              decoding="async"
+              draggable="false"
+            />
+          } @else {
+            <div class="slide__blank">
+              <span class="slide__blank-name">{{ project.name }}</span>
+              <span class="slide__blank-year">{{ project.year }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="slide__body">
+          <div class="slide__head">
+            <h3 class="slide__name">{{ project.name }}</h3>
+            <span class="slide__year">{{ project.year }}</span>
+          </div>
+
+          <p class="slide__tagline">{{ tagline(project) }}</p>
+          <p class="slide__description">{{ description(project) }}</p>
+
+          <ul class="slide__tags">
+            @for (tag of project.tags; track tag) {
+              <li>{{ tag }}</li>
+            }
+          </ul>
+
+          @if (project.links.length) {
+            <div class="slide__links">
+              @for (link of project.links; track link.url) {
+                <a
+                  class="slide__link"
+                  [class.slide__link--live]="link.kind === 'live'"
+                  [href]="link.url"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  [attr.tabindex]="slide === index() ? null : -1"
+                >
+                  <app-icon [name]="link.kind === 'live' ? 'link' : 'github'" [size]="15" />
+                  {{ link.label ?? t().projects.sourceCode }}
+                  <app-icon name="arrow-up-right" [size]="14" />
+                </a>
+              }
+            </div>
+          } @else {
+            <p class="slide__private">{{ t().projects.privateNote }}</p>
+          }
+        </div>
+      </article>
+    }
+  </div>
+
+  <div class="overlay">
+    <div class="overlay__media">
+      @let shot = currentShot();
+
+      <div class="bar" [class.bar--plain]="!shot">
+        @if (shot) {
+          @if (shot.href) {
+            <a
+              class="bar__caption bar__caption--link"
+              [href]="shot.href"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ caption(shot) }}
+              <app-icon name="arrow-up-right" [size]="12" />
+            </a>
+          } @else {
+            <span class="bar__caption">{{ caption(shot) }}</span>
+          }
+        } @else {
+          <span></span>
+        }
+
+        <div class="bar__tools">
+          @if (current().shots.length > 1) {
+            <div class="bar__dots">
+              @for (projectShot of current().shots; track projectShot.src; let dot = $index) {
+                <button
+                  type="button"
+                  class="bar__dot"
+                  [class.bar__dot--active]="dot === shotIndex()"
+                  [attr.aria-label]="caption(projectShot)"
+                  [attr.aria-current]="dot === shotIndex() ? 'true' : null"
+                  (click)="showShot(dot)"
+                ></button>
+              }
+            </div>
+          }
+
+          @if (canAutoplay()) {
+            <button
+              type="button"
+              class="bar__playback"
+              [attr.aria-label]="paused() ? t().projects.gallery.play : t().projects.gallery.pause"
+              [attr.aria-pressed]="paused()"
+              (click)="togglePlayback()"
+            >
+              <app-icon [name]="paused() ? 'play' : 'pause'" [size]="13" />
+            </button>
+          }
+        </div>
+      </div>
+
+      @if (hasControls()) {
+        <button
+          type="button"
+          class="arrow arrow--prev"
+          [attr.aria-label]="t().projects.gallery.previous"
+          (click)="go(index() - 1)"
+        >
+          <app-icon name="chevron-left" [size]="20" />
+        </button>
+
+        <button
+          type="button"
+          class="arrow arrow--next"
+          [attr.aria-label]="t().projects.gallery.next"
+          (click)="go(index() + 1)"
+        >
+          <app-icon name="chevron-right" [size]="20" />
+        </button>
+      }
+    </div>
+  </div>
+</div>
+
+@if (hasControls()) {
+  <div class="rail" #rail (mouseenter)="hold(true)" (mouseleave)="hold(false)">
+    @for (project of projects(); track project.id; let slide = $index) {
+      <button
+        #railItem
+        type="button"
+        class="rail__item"
+        [class.rail__item--active]="slide === index()"
+        [attr.aria-current]="slide === index() ? 'true' : null"
+        (click)="go(slide)"
+      >
+        @let thumb = project.shots[0];
+
+        @if (thumb) {
+          <img
+            class="rail__image"
+            [src]="thumb.src"
+            [alt]="project.name"
+            width="1200"
+            height="680"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        } @else {
+          <span class="rail__image rail__image--blank">{{ project.year }}</span>
+        }
+
+        <span class="rail__label">{{ project.name }}</span>
+      </button>
+    }
+  </div>
+}
