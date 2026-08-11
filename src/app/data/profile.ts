@@ -5,7 +5,11 @@ export interface SocialLink {
   readonly icon: 'github' | 'linkedin' | 'instagram' | 'mail';
 }
 
-export const CONTACT_EMAIL = 'kontakt@tymoteuszbaran.pl';
+export const CONTACT_EMAIL = 'baran.tymoteusz@gmail.com';
+
+export const CONTACT_PHONE = '+48 728 761 171';
+
+export const CONTACT_PHONE_HREF = 'tel:+48728761171';
 
 /**
  * Adres, pod który formularz kontaktowy wysyła POST z JSON-em.

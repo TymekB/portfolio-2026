@@ -13,6 +13,11 @@
           <span class="contact__mail-value">{{ email }}</span>
         </a>
 
+        <a class="contact__mail" [href]="phoneHref">
+          <span class="contact__mail-label">{{ t().contact.phoneLabel }}</span>
+          <span class="contact__mail-value">{{ phone }}</span>
+        </a>
+
         <ul class="contact__links">
           @for (social of socials; track social.url) {
             <li>

@@ -184,6 +184,7 @@ export const en: Dictionary = {
     title: 'Let’s talk about your project',
     lead: 'Describe in a few sentences what you want to build — an application, a website, a store or an ERP integration. I will come back with questions, a time estimate and a proposed next step.',
     directLabel: 'Write directly',
+    phoneLabel: 'Call me',
     stepsTitle: 'What happens next',
     steps: [
       'I reply with questions that pin down the scope.',

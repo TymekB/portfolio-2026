@@ -186,6 +186,7 @@ export const pl = {
     title: 'Porozmawiajmy o projekcie',
     lead: 'Opisz w kilku zdaniach, co chcesz zbudować — aplikację, stronę, sklep czy integrację z ERP. Odpiszę z pytaniami, szacunkiem czasu i propozycją kolejnego kroku.',
     directLabel: 'Napisz bezpośrednio',
+    phoneLabel: 'Zadzwoń',
     stepsTitle: 'Co dalej',
     steps: [
       'Odpisuję z pytaniami, które doprecyzują zakres.',
