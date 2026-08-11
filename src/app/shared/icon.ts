@@ -6,6 +6,8 @@ export type IconName =
   | 'instagram'
   | 'mail'
   | 'arrow-up-right'
+  | 'chevron-left'
+  | 'chevron-right'
   | 'link'
   | 'check'
   | 'alert'
@@ -57,6 +59,12 @@ export type IconName =
         }
         @case ('arrow-up-right') {
           <path d="M7 17 17 7M8.5 7H17v8.5" />
+        }
+        @case ('chevron-left') {
+          <path d="M14.5 5.5 8 12l6.5 6.5" />
+        }
+        @case ('chevron-right') {
+          <path d="M9.5 5.5 16 12l-6.5 6.5" />
         }
         @case ('link') {
           <path d="M10 13.5a3.6 3.6 0 0 0 5.4.4l2.6-2.6a3.6 3.6 0 0 0-5.1-5.1l-1.5 1.5" />

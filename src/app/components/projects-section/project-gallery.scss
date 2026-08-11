@@ -1,0 +1,124 @@
+.gallery {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-sunken);
+  touch-action: pan-y;
+}
+
+.gallery__track {
+  display: flex;
+  transition: transform 0.38s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+.gallery__slide {
+  position: relative;
+  flex: 0 0 100%;
+  aspect-ratio: 1200 / 680;
+}
+
+.gallery__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  user-select: none;
+}
+
+.gallery__caption {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(6px);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.gallery__caption--link {
+  color: var(--text);
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+
+  &:hover {
+    background: #fff;
+    color: var(--accent);
+  }
+}
+
+.gallery__arrow {
+  position: absolute;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(6px);
+  color: var(--text);
+  opacity: 0;
+  transition:
+    opacity 0.18s ease,
+    background 0.15s ease;
+
+  &--prev {
+    left: 10px;
+  }
+
+  &--next {
+    right: 10px;
+  }
+
+  &:hover {
+    background: #fff;
+  }
+}
+
+.gallery:hover .gallery__arrow,
+.gallery:focus-within .gallery__arrow {
+  opacity: 1;
+}
+
+.gallery__dots {
+  position: absolute;
+  right: 10px;
+  bottom: 12px;
+  display: flex;
+  gap: 5px;
+}
+
+.gallery__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: rgba(23, 23, 27, 0.28);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.55);
+  transition:
+    background 0.15s ease,
+    width 0.18s ease;
+
+  &--active {
+    width: 18px;
+    background: var(--accent);
+  }
+}
+
+@media (hover: none) {
+  .gallery__arrow {
+    opacity: 1;
+  }
+}

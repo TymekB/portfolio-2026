@@ -1,0 +1,76 @@
+<div
+  class="gallery"
+  role="group"
+  [attr.aria-label]="projectName()"
+  [attr.aria-roledescription]="hasControls() ? t().projects.gallery.roleDescription : null"
+  (pointerdown)="onSwipeStart($event)"
+  (pointerup)="onSwipeEnd($event)"
+  (pointercancel)="onSwipeCancel()"
+  (keydown.arrowLeft)="go(index() - 1)"
+  (keydown.arrowRight)="go(index() + 1)"
+>
+  <div class="gallery__track" [style.transform]="offset()">
+    @for (shot of shots(); track shot.src; let slide = $index) {
+      <div class="gallery__slide" [attr.aria-hidden]="slide === index() ? null : 'true'">
+        <img
+          class="gallery__image"
+          [src]="shot.src"
+          [alt]="alt(shot)"
+          width="1200"
+          height="680"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+        />
+
+        @if (shot.href) {
+          <a
+            class="gallery__caption gallery__caption--link"
+            [href]="shot.href"
+            target="_blank"
+            rel="noopener noreferrer"
+            [attr.tabindex]="slide === index() ? null : -1"
+          >
+            {{ caption(shot) }}
+            <app-icon name="arrow-up-right" [size]="12" />
+          </a>
+        } @else {
+          <span class="gallery__caption">{{ caption(shot) }}</span>
+        }
+      </div>
+    }
+  </div>
+
+  @if (hasControls()) {
+    <button
+      type="button"
+      class="gallery__arrow gallery__arrow--prev"
+      [attr.aria-label]="t().projects.gallery.previous"
+      (click)="go(index() - 1)"
+    >
+      <app-icon name="chevron-left" [size]="16" />
+    </button>
+
+    <button
+      type="button"
+      class="gallery__arrow gallery__arrow--next"
+      [attr.aria-label]="t().projects.gallery.next"
+      (click)="go(index() + 1)"
+    >
+      <app-icon name="chevron-right" [size]="16" />
+    </button>
+
+    <div class="gallery__dots">
+      @for (shot of shots(); track shot.src; let slide = $index) {
+        <button
+          type="button"
+          class="gallery__dot"
+          [class.gallery__dot--active]="slide === index()"
+          [attr.aria-label]="caption(shot)"
+          [attr.aria-current]="slide === index() ? 'true' : null"
+          (click)="go(slide)"
+        ></button>
+      }
+    </div>
+  }
+</div>

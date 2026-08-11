@@ -17,12 +17,22 @@ export interface ProjectLink {
   readonly label?: string;
 }
 
+export type ProjectShotKind = 'landing' | 'store' | 'panel' | 'app';
+
+export interface ProjectShot {
+  readonly src: string;
+  readonly kind: ProjectShotKind;
+  /** Ustawiany tylko dla zrzutów z publicznie dostępnego widoku. */
+  readonly href?: string;
+}
+
 export interface Project {
   readonly id: ProjectId;
   readonly name: string;
   readonly year: string;
   readonly tags: readonly string[];
   readonly links: readonly ProjectLink[];
+  readonly shots: readonly ProjectShot[];
   readonly featured: boolean;
 }
 
@@ -36,6 +46,13 @@ export const PROJECTS: readonly Project[] = [
       { url: 'https://labkawa.pl/', kind: 'live', label: 'labkawa.pl' },
       { url: 'https://github.com/TymekB/labkawa', kind: 'code' },
     ],
+    shots: [
+      {
+        src: 'projects/labkawa-landing.webp',
+        kind: 'landing',
+        href: 'https://labkawa.pl/',
+      },
+    ],
     featured: true,
   },
   {
@@ -44,6 +61,13 @@ export const PROJECTS: readonly Project[] = [
     year: '2026',
     tags: ['Angular', 'ECharts', 'FMP API', 'Docker', 'Sentry'],
     links: [{ url: 'https://psg-calculator.com/', kind: 'live', label: 'psg-calculator.com' }],
+    shots: [
+      {
+        src: 'projects/psg-app.webp',
+        kind: 'app',
+        href: 'https://psg-calculator.com/',
+      },
+    ],
     featured: true,
   },
   {
@@ -52,6 +76,14 @@ export const PROJECTS: readonly Project[] = [
     year: '2026',
     tags: ['Angular 22', 'Sylius 2.2', 'Symfony 7.4', 'FrankenPHP', 'MySQL'],
     links: [{ url: 'https://github.com/TymekB/oma-krakow', kind: 'code' }],
+    shots: [
+      {
+        src: 'projects/oma-landing.webp',
+        kind: 'landing',
+        href: 'https://oma.pl/',
+      },
+      { src: 'projects/oma-panel.webp', kind: 'panel' },
+    ],
     featured: true,
   },
   {
@@ -60,6 +92,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2026',
     tags: ['Symfony 7', 'PHP 8.4', 'DDD', 'CQRS', 'PostgreSQL', 'Angular 20'],
     links: [],
+    shots: [],
     featured: true,
   },
   {
@@ -68,6 +101,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2026',
     tags: ['Angular 22', 'TypeScript 6', 'SCSS'],
     links: [{ url: 'https://github.com/TymekB/lalewicz-english', kind: 'code' }],
+    shots: [],
     featured: false,
   },
   {
@@ -76,6 +110,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2025',
     tags: ['FrankenPHP', 'Symfony 7.2', 'k6', 'InfluxDB', 'Grafana'],
     links: [],
+    shots: [],
     featured: false,
   },
   {
@@ -84,6 +119,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2025',
     tags: ['Angular 17', 'Signals', 'SVG', 'SCSS'],
     links: [{ url: 'https://github.com/TymekB/droga-do-wallstreet', kind: 'code' }],
+    shots: [],
     featured: false,
   },
   {
@@ -92,6 +128,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2025',
     tags: ['Swift', 'macOS', 'LaunchAgent'],
     links: [{ url: 'https://github.com/TymekB/work-timer', kind: 'code' }],
+    shots: [],
     featured: false,
   },
   {
@@ -100,6 +137,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2019',
     tags: ['Shell', 'PHP', 'Open source'],
     links: [{ url: 'https://github.com/TymekB/pre-commit-php', kind: 'code' }],
+    shots: [],
     featured: false,
   },
   {
@@ -108,6 +146,7 @@ export const PROJECTS: readonly Project[] = [
     year: '2026',
     tags: ['Claude Code', 'Automation', 'DX'],
     links: [],
+    shots: [],
     featured: false,
   },
 ];

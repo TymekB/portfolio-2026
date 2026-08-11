@@ -57,6 +57,16 @@
     transform: translateY(-3px);
     box-shadow: var(--shadow-md);
   }
+
+  &--illustrated {
+    padding-top: 0;
+    overflow: hidden;
+  }
+
+  app-project-gallery {
+    display: block;
+    margin: 0 -26px 22px;
+  }
 }
 
 .project__head {

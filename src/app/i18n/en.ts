@@ -125,6 +125,17 @@ export const en: Dictionary = {
     sourceCode: 'Source code',
     privateNote: 'Private project — happy to walk through the details',
     more: 'All repositories on GitHub',
+    shots: {
+      landing: 'Landing page',
+      store: 'Store',
+      panel: 'Admin panel',
+      app: 'Application',
+    },
+    gallery: {
+      roleDescription: 'screenshot carousel',
+      previous: 'Previous screenshot',
+      next: 'Next screenshot',
+    },
     items: {
       labkawa: {
         tagline: 'Online diagnostic laboratory',

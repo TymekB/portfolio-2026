@@ -127,6 +127,17 @@ export const pl = {
     sourceCode: 'Kod źródłowy',
     privateNote: 'Projekt prywatny — chętnie opowiem o szczegółach',
     more: 'Wszystkie repozytoria na GitHubie',
+    shots: {
+      landing: 'Strona główna',
+      store: 'Sklep',
+      panel: 'Panel administracyjny',
+      app: 'Aplikacja',
+    },
+    gallery: {
+      roleDescription: 'karuzela zrzutów ekranu',
+      previous: 'Poprzedni zrzut ekranu',
+      next: 'Następny zrzut ekranu',
+    },
     items: {
       labkawa: {
         tagline: 'Laboratorium diagnostyczne online',
