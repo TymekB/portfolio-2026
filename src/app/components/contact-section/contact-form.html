@@ -95,9 +95,11 @@
     @if (state() === 'error') {
       <p class="form__error" role="alert">
         <app-icon name="alert" [size]="18" />
-        {{ t().form.sendError }}
-        <a [href]="'mailto:' + email">{{ email }}</a
-        >.
+        <span>
+          {{ t().form.sendError }}
+          <a [href]="'mailto:' + email">{{ email }}</a
+          >.
+        </span>
       </p>
     }
 

@@ -109,7 +109,8 @@ export class ContactForm {
 
       this.reset();
       this.state.set('sent');
-    } catch {
+    } catch (error) {
+      console.error('Wysyłka formularza nie powiodła się', error);
       this.state.set('error');
     }
   }
