@@ -18,7 +18,6 @@ export class SiteHeader {
   protected readonly navItems = computed(() => [
     { label: this.t().nav.services, fragment: 'uslugi' },
     { label: this.t().nav.projects, fragment: 'projekty' },
-    { label: this.t().nav.about, fragment: 'o-mnie' },
     { label: this.t().nav.tech, fragment: 'technologie' },
   ]);
 

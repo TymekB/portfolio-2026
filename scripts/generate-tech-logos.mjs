@@ -21,6 +21,16 @@ const FROM_PACKAGE = [
 ];
 
 /**
+ * Znaki pokazywane wyłącznie przy tagach projektów — nie trafiają na ścianę
+ * logotypów w sekcji "Technologie". Tytuł musi być zgodny z tagiem projektu.
+ */
+const TAG_ONLY = [
+  ['siSass', 'SCSS'],
+  ['siApacheecharts', 'ECharts'],
+  ['siSentry', 'Sentry'],
+];
+
+/**
  * Podmiany dla znaków, w których aktualna wersja simple-icons nie odpowiada
  * temu, co chcemy pokazać. Plik musi mieć viewBox "0 0 24 24" i jedną ścieżkę.
  */
@@ -75,7 +85,7 @@ function serialise({ title, hex, viewBox, paths }) {
   return `  { title: ${JSON.stringify(title)}, hex: '#${hex}', viewBox: '${viewBox}', parts: [${parts}] },`;
 }
 
-const logos = FROM_PACKAGE.map(([key, title]) => {
+function fromPackage([key, title]) {
   const icon = simpleIcons[key];
   if (!icon) {
     throw new Error(`simple-icons nie zawiera ikony "${key}"`);
@@ -89,7 +99,10 @@ const logos = FROM_PACKAGE.map(([key, title]) => {
 
   // znaki z pakietu malujemy kolorem marki, więc bez własnego fill
   return { title, hex: icon.hex, viewBox: '0 0 24 24', paths: [{ d: icon.path }] };
-});
+}
+
+const logos = FROM_PACKAGE.map(fromPackage);
+const tagLogos = TAG_ONLY.map(fromPackage);
 
 for (const custom of CUSTOM) {
   const { viewBox, paths } = readSvg(custom.file);
@@ -123,7 +136,13 @@ export interface TechLogo {
 export const TECH_LOGOS: readonly TechLogo[] = [
 ${logos.map(serialise).join('\n')}
 ];
+
+export const TAG_LOGOS: readonly TechLogo[] = [
+${tagLogos.map(serialise).join('\n')}
+];
 `;
 
 writeFileSync(new URL('../src/app/data/tech-logos.ts', import.meta.url), file);
-console.log(`Zapisano ${logos.length} logotypów do src/app/data/tech-logos.ts`);
+console.log(
+  `Zapisano ${logos.length} logotypów i ${tagLogos.length} znaków dla tagów do src/app/data/tech-logos.ts`,
+);

@@ -42,11 +42,17 @@
           <h3 class="slide__name">{{ project.name }}</h3>
 
           <p class="slide__tagline">{{ tagline(project) }}</p>
-          <p class="slide__description">{{ description(project) }}</p>
 
           <ul class="slide__tags">
             @for (tag of project.tags; track tag) {
-              <li>{{ tag }}</li>
+              @let logo = techLogo(tag);
+
+              <li class="slide__tag" [class.slide__tag--branded]="!!logo">
+                @if (logo) {
+                  <app-tech-logo [logo]="logo" [size]="14" />
+                }
+                {{ tag }}
+              </li>
             }
           </ul>
 

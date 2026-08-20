@@ -15,7 +15,9 @@ import {
 
 import { I18n } from '../../i18n/i18n';
 import { Icon } from '../../shared/icon';
+import { TechLogoIcon, techLogoForTag } from '../../shared/tech-logo';
 import type { Project, ProjectShot } from '../../data/projects';
+import type { TechLogo } from '../../data/tech-logos';
 
 const SWIPE_THRESHOLD_PX = 40;
 const AUTOPLAY_INTERVAL_MS = 6000;
@@ -23,7 +25,7 @@ const AUTOPLAY_INTERVAL_MS = 6000;
 @Component({
   selector: 'app-project-showcase',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Icon],
+  imports: [Icon, TechLogoIcon],
   templateUrl: './project-showcase.html',
   styleUrl: './project-showcase.scss',
 })
@@ -73,8 +75,8 @@ export class ProjectShowcase {
     return this.t().projects.items[project.id].tagline;
   }
 
-  protected description(project: Project): string {
-    return this.t().projects.items[project.id].description;
+  protected techLogo(tag: string): TechLogo | null {
+    return techLogoForTag(tag);
   }
 
   protected caption(shot: ProjectShot): string {

@@ -13,10 +13,17 @@ export const CONTACT_PHONE_HREF = 'tel:+48728761171';
 
 /**
  * Adres, pod który formularz kontaktowy wysyła POST z JSON-em.
- * Dopóki jest `null`, formularz po walidacji otwiera klienta pocztowego
- * z gotową treścią — strona nie wymaga wtedy żadnego backendu.
  */
-export const FORM_ENDPOINT: string | null = null;
+export const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+
+/**
+ * Publiczny klucz Web3Forms — służy wyłącznie do wysyłki i nie daje dostępu
+ * do skrzynki, dlatego może być w repozytorium. Gdy jest `null`, formularz
+ * po walidacji otwiera klienta pocztowego z gotową treścią.
+ */
+export const FORM_ACCESS_KEY: string | null = '82f6e53a-1d77-4448-ba00-9d9459eaec49';
+
+export const FORM_SUBJECT_PREFIX = '[tymoteuszbaran.pl]';
 
 export const SOCIAL_LINKS: readonly SocialLink[] = [
   {

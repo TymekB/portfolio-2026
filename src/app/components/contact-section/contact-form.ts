@@ -7,7 +7,12 @@ import {
   type AbstractControl,
 } from '@angular/forms';
 
-import { CONTACT_EMAIL, FORM_ENDPOINT } from '../../data/profile';
+import {
+  CONTACT_EMAIL,
+  FORM_ACCESS_KEY,
+  FORM_ENDPOINT,
+  FORM_SUBJECT_PREFIX,
+} from '../../data/profile';
 import { I18n } from '../../i18n/i18n';
 import { Icon } from '../../shared/icon';
 
@@ -69,7 +74,7 @@ export class ContactForm {
     const { name, email, subject, message } = this.form.getRawValue();
     const subjectLabel = this.t().form.subjects[subject] ?? this.t().form.subjects[0]!;
 
-    if (FORM_ENDPOINT === null) {
+    if (FORM_ACCESS_KEY === null) {
       this.openMailClient(name, email, subjectLabel, message);
       this.state.set('sent');
       return;
@@ -78,14 +83,28 @@ export class ContactForm {
     this.state.set('sending');
 
     try {
+      // treść jako form-urlencoded, bo JSON wymusiłby preflight OPTIONS, którego Web3Forms nie obsługuje
       const response = await fetch(FORM_ENDPOINT, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name, email, subject: subjectLabel, message }),
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
+          Accept: 'application/json',
+        },
+        body: new URLSearchParams({
+          access_key: FORM_ACCESS_KEY,
+          subject: `${FORM_SUBJECT_PREFIX} ${subjectLabel}`,
+          from_name: 'tymoteuszbaran.pl',
+          name,
+          email,
+          replyto: email,
+          message,
+        }),
       });
 
-      if (!response.ok) {
-        throw new Error(`Serwer odpowiedział statusem ${response.status}`);
+      const result = (await response.json()) as { success?: boolean; message?: string };
+
+      if (!response.ok || result.success !== true) {
+        throw new Error(result.message ?? `Serwer odpowiedział statusem ${response.status}`);
       }
 
       this.reset();

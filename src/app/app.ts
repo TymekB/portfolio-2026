@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
 import { I18n } from './i18n/i18n';
 
-import { AboutSection } from './components/about-section/about-section';
 import { ContactSection } from './components/contact-section/contact-section';
 import { HeroSection } from './components/hero-section/hero-section';
 import { ProjectsSection } from './components/projects-section/projects-section';
@@ -17,7 +16,6 @@ import { StackSection } from './components/stack-section/stack-section';
     SiteHeader,
     HeroSection,
     ServicesSection,
-    AboutSection,
     StackSection,
     ProjectsSection,
     ContactSection,
@@ -29,7 +27,6 @@ import { StackSection } from './components/stack-section/stack-section';
       <app-hero-section />
       <app-services-section />
       <app-projects-section />
-      <app-about-section />
       <app-stack-section />
       <app-contact-section />
     </main>

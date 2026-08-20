@@ -7,7 +7,6 @@ export const pl = {
 
   nav: {
     services: 'Usługi',
-    about: 'O mnie',
     tech: 'Technologie',
     projects: 'Projekty',
     cta: 'Napisz do mnie',
@@ -19,11 +18,7 @@ export const pl = {
   },
 
   hero: {
-    badge: 'Kraków · otwarty na współpracę',
-    roleBefore: 'Programista z ponad ',
-    roleHighlight: '10-letnim',
-    roleAfter:
-      ' doświadczeniem. Tworzę aplikacje webowe, strony internetowe, sklepy e-commerce i systemy ERP.',
+    role: 'Tworzę aplikacje webowe, strony internetowe, sklepy e-commerce i systemy ERP.',
     lead: 'Backend w PHP i Symfony, frontend w Angularze — od modelu domenowego aż po wdrożenie na produkcję. Buduję systemy, które muszą wytrzymać ruch i lata rozwoju: architektura heksagonalna, DDD i CQRS tam, gdzie złożoność tego wymaga, i prosty kod tam, gdzie nie.',
     ctaPrimary: 'Napisz do mnie',
     ctaSecondary: 'Zobacz projekty',
@@ -78,33 +73,6 @@ export const pl = {
     ],
   },
 
-  about: {
-    label: 'O mnie',
-    title: 'Ponad dekada pisania kodu, który idzie na produkcję',
-    paragraphs: [
-      'Zaczynałem od PHP i od tamtej pory nie przestałem — przez lata doszły do tego Symfony, Doctrine, kolejki, wyszukiwarki i cała infrastruktura wokół. Dziś pracuję głównie przy systemach e-commerce i marketplace: integracjach z zewnętrznymi platformami, obsłudze zamówień, katalogach produktowych i przetwarzaniu danych, które musi działać także wtedy, gdy ruch rośnie kilkukrotnie.',
-      'Równolegle prowadzę frontend — Angular w wersji standalone, na sygnałach, bez zbędnych bibliotek. Lubię, kiedy jedna osoba może przeprowadzić funkcję od modelu domenowego aż do ekranu użytkownika i odpowiada za całość, a nie za wycinek.',
-      'Poza pracą etatową buduję własne projekty — od aplikacji finansowych, przez sklepy na Syliusie, po natywne narzędzia na macOS. To one najszybciej weryfikują, czy dane podejście faktycznie się broni.',
-    ],
-    principles: [
-      {
-        title: 'Architektura pod złożoność',
-        body: 'Prosty CRUD zostaje CRUD-em. Heksagon, DDD i CQRS wchodzą tam, gdzie domena naprawdę jest złożona — nie jako ozdoba.',
-      },
-      {
-        title: 'Kod, który się czyta',
-        body: 'Nazwy zamiast komentarzy, jawne typy, statyczna analiza na wysokim poziomie. Kod ma tłumaczyć się sam.',
-      },
-      {
-        title: 'Spójność danych',
-        body: 'Transakcje, idempotentne handlery i świadomość race conditions. Połowiczny zapis to gorszy błąd niż brak zapisu.',
-      },
-      {
-        title: 'Wydajność mierzona',
-        body: 'Zamiast domysłów — benchmarki, profilowanie i metryki. Jeśli twierdzę, że jest szybciej, mam na to liczby.',
-      },
-    ],
-  },
 
   stack: {
     label: 'Technologie',
@@ -144,28 +112,18 @@ export const pl = {
     items: {
       labkawa: {
         tagline: 'Laboratorium diagnostyczne online',
-        description:
-          'Serwis laboratorium diagnostycznego: katalog badań z wyszukiwarką i filtrami, pakiety profilaktyczne z kalkulacją oszczędności, mapa punktów pobrań, koszyk i panel z wynikami. Design system oparty na CSS custom properties — cały motyw przestawia się jednym kolorem.',
       },
       psg: {
         tagline: 'Wskaźnik wyceny spółek w stylu terminala',
-        description:
-          'Aplikacja licząca wskaźnik PSG — odpowiednik PEG dla przychodów. Wyszukiwarka spółek z autouzupełnianiem, wykres trendu, kafelki wskaźników ze zmianą w zakresie, panel z ostatnimi wynikami finansowymi i konsensusem cen docelowych oraz zegary głównych giełd z sesyjnym statusem open/closed.',
       },
       oma: {
         tagline: 'Strona gabinetu fizjoterapii',
-        description:
-          'Landing gabinetu w Angularze, zbudowany do statyków i serwowany pod „/" z tego samego kontenera FrankenPHP co sklep i panel. Prezentuje zabiegi, zespół i kontakt, a stąd prowadzi wejście do sklepu.',
       },
       omaStore: {
         tagline: 'Sklep gabinetu na Syliusie',
-        description:
-          'Sklep pod „/sklep/" z olejkami, kosmetykami i voucherami na zabiegi. Katalog podzielony na pielęgnację, aromaterapię i vouchery, do tego koszyk, konta klientów i szablony Twiga przepisane pod identyfikację marki gabinetu.',
       },
       omaPanel: {
         tagline: 'Zaplecze sklepu w panelu Syliusa',
-        description:
-          'Panel pod „/admin/" do prowadzenia sklepu: kafelki sprzedaży i klientów, wykres sprzedaży oraz opłaconych zamówień w zakresie dwóch tygodni, miesiąca i roku, katalog z produktami, magazynem i wariantami, obsługa zamówień, płatności i przesyłek.',
       },
     },
   },

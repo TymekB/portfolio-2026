@@ -34,11 +34,13 @@ src/
    │  ├─ profile.ts          # e-mail, endpoint formularza, linki, stack
    │  ├─ projects.ts         # dane projektów niezależne od języka (id, rok, tagi, linki)
    │  └─ tech-logos.ts       # GENEROWANY — nie edytuj ręcznie
-   ├─ shared/icon.ts         # ikony interfejsu (SVG inline)
-   └─ components/            # site-header, hero, services, about, stack, projects, contact
+   ├─ shared/
+   │  ├─ icon.ts             # ikony interfejsu (SVG inline)
+   │  └─ tech-logo.ts        # znak marki + dopasowanie znaku do tagu projektu
+   └─ components/            # site-header, hero, services, stack, projects, contact
 ```
 
-Sekcje na stronie w kolejności: hero → usługi → o mnie → technologie → projekty → kontakt.
+Sekcje na stronie w kolejności: hero → usługi → projekty → technologie → kontakt.
 
 ## Języki
 
@@ -51,9 +53,8 @@ brak jakiegokolwiek klucza w `en.ts` jest błędem kompilacji — nie da się pr
 fragmentu. Dodając tekst: najpierw `pl.ts`, potem TypeScript wskaże, czego brakuje w `en.ts`.
 
 Podział między `i18n/` a `data/`: w `data/projects.ts` zostaje to, co niezależne od języka
-(identyfikator, rok, tagi, adresy linków), a `tagline` i `description` żyją w słownikach
-pod tym samym `id`. Etykieta „Kod źródłowy" bierze się ze słownika, nazwa domeny przy linku
-`live` — z danych projektu.
+(identyfikator, rok, tagi, adresy linków), a `tagline` żyje w słownikach pod tym samym `id`.
+Etykieta „Kod źródłowy" bierze się ze słownika, nazwa domeny przy linku `live` — z danych projektu.
 
 Ograniczenie: przełączanie działa w runtime, więc obie wersje siedzą pod jednym adresem
 i w źródle HTML jest tylko język początkowy. Dla portfolio to zwykle wystarcza. Jeśli
@@ -63,9 +64,10 @@ angielska wersja ma być osobno indeksowana, trzeba przejść na wbudowane i18n 
 ## Edycja treści
 
 - **teksty (oba języki)** — `src/app/i18n/pl.ts` i `src/app/i18n/en.ts`.
-- **projekty** — `data/projects.ts` (struktura) + `projects.items` w słownikach (opisy).
-  Pole `featured` decyduje, czy projekt jest widoczny w domyślnej zakładce „Wyróżnione".
+- **projekty** — `data/projects.ts` (struktura) + `projects.items` w słownikach (taglines).
   Pusta tablica `links` renderuje adnotację o projekcie prywatnym zamiast przycisków.
+  Tagi dostają kolorowy znak marki, jeśli `techLogoForTag` znajdzie go po nazwie bez numeru
+  wersji („Symfony 7.4" → znak Symfony); pozostałe zostają zwykłymi etykietami.
 - **linki społecznościowe i stack** — `data/profile.ts`.
 - **adres e-mail** — stała `CONTACT_EMAIL` w `data/profile.ts`. Zmiana w jednym miejscu
   aktualizuje formularz, kartę kontaktu i listę linków.
@@ -75,23 +77,29 @@ angielska wersja ma być osobno indeksowana, trzeba przejść na wbudowane i18n 
 Reactive Forms z walidacją po stronie klienta (wymagane pola, format e-maila, minimalna długość
 wiadomości, zgoda na przetwarzanie danych) oraz honeypotem `company` na proste boty.
 
-Zachowanie po wysłaniu zależy od stałej `FORM_ENDPOINT` w `src/app/data/profile.ts`:
+Wysyłka idzie przez [Web3Forms](https://web3forms.com/) — `POST` na `FORM_ENDPOINT`
+z `FORM_ACCESS_KEY` w treści żądania. Klucz jest publiczny (służy wyłącznie do wysyłki,
+nie daje dostępu do skrzynki), więc siedzi w `src/app/data/profile.ts`. Odpowiedź
+`success: true` przełącza formularz na ekran potwierdzenia, cokolwiek innego — na komunikat
+błędu z adresem e-mail jako drogą zapasową.
 
-- **`null` (obecnie)** — formularz otwiera klienta pocztowego z gotowym tematem i treścią.
-  Strona nie wymaga wtedy żadnego backendu.
-- **adres URL** — formularz wysyła `POST` z JSON-em `{ name, email, subject, message }`
-  pod podany adres i pokazuje ekran potwierdzenia albo komunikat błędu. Pasuje do usług
-  typu Formspree/Getform lub własnego endpointu.
+Treść leci jako `application/x-www-form-urlencoded`, nie JSON: JSON wymusiłby preflight
+`OPTIONS`, na który Web3Forms odpowiada `403` bez nagłówków CORS. Formularz form-urlencoded
+jest żądaniem „prostym" w rozumieniu CORS, więc preflightu nie ma.
+
+Ustawienie `FORM_ACCESS_KEY` na `null` wyłącza backend: formularz po walidacji otwiera
+klienta pocztowego z gotowym tematem i treścią.
 
 ## Logotypy technologii
 
 Ścieżki SVG pochodzą z pakietu `simple-icons` (licencja CC0) i są **wbudowane w kod** przez
-`npm run icons` — w runtime nie ma zależności ani żadnego zapytania do CDN. Lista technologii
-jest w tablicy `WANTED` w `scripts/generate-tech-logos.mjs`. Znaki towarowe należą do
-ich właścicieli.
+`npm run icons` — w runtime nie ma zależności ani żadnego zapytania do CDN. Listy są
+w `scripts/generate-tech-logos.mjs`: `FROM_PACKAGE` trafia na ścianę logotypów w sekcji
+„Technologie", a `TAG_ONLY` tylko do tagów projektów. Znaki towarowe należą do ich właścicieli.
 
-Sylius i FrankenPHP nie mają logotypów w `simple-icons`, więc występują tylko jako etykiety
-tekstowe w tabeli stacku.
+Sylius pochodzi wprost od właściciela znaku (`scripts/icon-overrides/`), bo `simple-icons`
+go nie zawiera. Twig i FrankenPHP nie mają znaku w żadnym z tych źródeł, więc występują
+jako zwykłe etykiety tekstowe.
 
 ## Wdrożenie
 

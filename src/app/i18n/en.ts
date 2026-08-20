@@ -9,7 +9,6 @@ export const en: Dictionary = {
 
   nav: {
     services: 'Services',
-    about: 'About',
     tech: 'Tech',
     projects: 'Projects',
     cta: 'Get in touch',
@@ -21,11 +20,7 @@ export const en: Dictionary = {
   },
 
   hero: {
-    badge: 'Kraków · open to work',
-    roleBefore: 'Developer with over ',
-    roleHighlight: '10 years',
-    roleAfter:
-      ' of experience. I build web applications, websites, e-commerce stores and ERP systems.',
+    role: 'I build web applications, websites, e-commerce stores and ERP systems.',
     lead: 'Backend in PHP and Symfony, frontend in Angular — from the domain model all the way to production. I build systems that have to survive both traffic and years of development: hexagonal architecture, DDD and CQRS where the complexity calls for it, and plain code where it does not.',
     ctaPrimary: 'Get in touch',
     ctaSecondary: 'See projects',
@@ -76,33 +71,6 @@ export const en: Dictionary = {
     ],
   },
 
-  about: {
-    label: 'About',
-    title: 'Over a decade of writing code that ships',
-    paragraphs: [
-      'I started with PHP and never stopped — over the years Symfony, Doctrine, message queues, search engines and all the surrounding infrastructure joined in. Today I mostly work on e-commerce and marketplace systems: integrations with external platforms, order handling, product catalogues and data processing that has to keep working when traffic multiplies.',
-      'In parallel I handle the frontend — Angular with standalone components and signals, without unnecessary libraries. I like it when one person can carry a feature from the domain model to the user’s screen and owns the whole thing rather than a slice of it.',
-      'Outside of full-time work I build my own projects — from finance apps, through Sylius stores, to native macOS tools. They are the fastest way to verify whether an approach actually holds up.',
-    ],
-    principles: [
-      {
-        title: 'Architecture matched to complexity',
-        body: 'Simple CRUD stays CRUD. Hexagonal, DDD and CQRS come in where the domain genuinely is complex — not as decoration.',
-      },
-      {
-        title: 'Code that reads itself',
-        body: 'Names instead of comments, explicit types, strict static analysis. Code should explain itself.',
-      },
-      {
-        title: 'Data consistency',
-        body: 'Transactions, idempotent handlers and awareness of race conditions. A half-written record is a worse bug than no record.',
-      },
-      {
-        title: 'Performance you can measure',
-        body: 'Benchmarks, profiling and metrics instead of guesses. If I claim something got faster, I have the numbers.',
-      },
-    ],
-  },
 
   stack: {
     label: 'Tech',
@@ -142,28 +110,18 @@ export const en: Dictionary = {
     items: {
       labkawa: {
         tagline: 'Online diagnostic laboratory',
-        description:
-          'A diagnostic laboratory service: a test catalogue with search and filters, preventive packages with savings calculation, a map of collection points, a cart and a results panel. The design system is built on CSS custom properties — the whole theme re-skins from a single colour.',
       },
       psg: {
         tagline: 'Terminal-style company valuation metric',
-        description:
-          'An app that computes the PSG ratio — a PEG equivalent for revenue. Company search with autocomplete, a trend chart, indicator tiles carrying their change over the selected range, a panel with the latest reported results and price-target consensus, plus clocks for the major exchanges with an open/closed session status.',
       },
       oma: {
         tagline: 'Physiotherapy practice site',
-        description:
-          'The practice landing page in Angular, built to static files and served at “/” from the same FrankenPHP container as the store and the panel. It presents treatments, the team and contact details, and hands visitors over to the store.',
       },
       omaStore: {
         tagline: 'Practice store on Sylius',
-        description:
-          'A store at “/sklep/” selling oils, cosmetics and treatment vouchers. The catalogue splits into skincare, aromatherapy and vouchers, with a cart, customer accounts and Twig templates rewritten to match the practice’s brand.',
       },
       omaPanel: {
         tagline: 'Store back office in the Sylius panel',
-        description:
-          'The panel at “/admin/” for running the store: sales and customer tiles, a chart of sales and paid orders across two weeks, a month and a year, a catalogue with products, inventory and variants, plus order, payment and shipment handling.',
       },
     },
   },
